@@ -137,8 +137,8 @@ footer {
   align-items: baseline;
 }
 
-.footer--score,
-.footer--round-count {
+#footer--score,
+#footer--round-count {
   border: 4px solid whitesmoke;
   padding: 1rem 2rem;
 }
