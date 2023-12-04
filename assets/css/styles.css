@@ -113,7 +113,14 @@ section {
   margin-top: 100px;
   min-height: 150px;
   background-color: darkblue;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+#display-result--title {
+  margin: auto;
   color: white;
+  text-transform: capitalize;
 }
 
 #hand-selection {

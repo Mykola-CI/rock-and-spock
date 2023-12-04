@@ -56,7 +56,7 @@ startRoundBtn.addEventListener("click", function () {
   hideSection("footer--score");
   hideSection("footer--round-count");
 
-  let indexComp = getComputerHand();
+  let indexComp = Math.floor(Math.random() * 5);
   console.log("This is Computers choice: " + indexComp); // Console
 
   let timeoutID = setTimeout(function () {
@@ -80,10 +80,6 @@ startRoundBtn.addEventListener("click", function () {
   });
 });
 
-function getComputerHand() {
-  return Math.floor(Math.random() * 5);
-}
-
 function defineWinner(compHand, userHand) {
   console.log("This is what happened:"); // Console
   console.log(compHand + "_versus_" + userHand); // Console
@@ -95,6 +91,7 @@ function defineWinner(compHand, userHand) {
   }
 
   if (compHand === userHand) {
+    document.getElementById("display-result--title").innerText = "Damn! It's a tie!"
     console.log("Damn it! It's a tie!"); // Console
   } else if (
     (userHand === 0 && (compHand === 2 || compHand === 3)) ||
@@ -103,10 +100,13 @@ function defineWinner(compHand, userHand) {
     (userHand === 3 && (compHand === 1 || compHand === 4)) ||
     (userHand === 4 && (compHand === 0 || compHand === 2))
   ) {
+    document.getElementById("display-result--title").innerText = `You win! ${hands[userHand]} beats ${hands[compHand]}`;
     console.log(`You win! ${hands[userHand]} beats ${hands[compHand]}`); // Console
   } else if (userHand === 5) {
+    document.getElementById("display-result--title").innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!`;
     console.log(`Oi! You haven't picked a hand! Pity, but you loose anyway!`); // Console
   } else {
+    document.getElementById("display-result--title").innerText = `Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}`;
     console.log(`Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}`); // Console
   }
 }
