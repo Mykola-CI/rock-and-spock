@@ -39,4 +39,30 @@ startRoundBtn.addEventListener("click", function () {
   hideSection("footer--score");
   hideSection("footer--round-count");
 
+  let nComp = getComputerHand();
+  console.log("This is Computers choice: " + nComp);
+
+  let timeoutID = setTimeout(function () {
+    defineWinner(nComp, 6);
+    console.log(nComp + ": nobody seems to have picked the hand");
+  }, 3000);
+
+  hands.forEach((hand, index) => {
+    document.getElementById(hand).addEventListener("click", function () {
+      clearTimeout(timeoutID);
+
+      defineWinner(nComp, index);
+      console.log("This is User's choice: " + hand);
+      console.log("This is User's index: " + index);
+    });
+  });
 });
+
+function getComputerHand() {
+  return Math.floor(Math.random() * 5);
+}
+
+function defineWinner(compHand, userHand) {
+  console.log("This is what happened:");
+  console.log(compHand + "_versus_" + userHand);
+}
