@@ -62,6 +62,9 @@ startRoundBtn.addEventListener("click", function () {
   let timeoutID = setTimeout(function () {
     indexUser = 5;
     console.log(indexComp + ": nobody seems to have picked the hand"); // Console
+    hideSection("clock-countdown");
+    hideSection("hand-selection");
+    displaySection("display-result");
     defineWinner(indexComp, indexUser);
   }, 3000);
 
@@ -70,6 +73,8 @@ startRoundBtn.addEventListener("click", function () {
       clearTimeout(timeoutID);
       console.log("This is User's choice: " + hand); // Console
       console.log("This is User's index: " + indexUser); // Console
+      hideSection("clock-countdown");
+      displaySection("display-result");
       defineWinner(indexComp, indexUser);
     });
   });
@@ -82,6 +87,12 @@ function getComputerHand() {
 function defineWinner(compHand, userHand) {
   console.log("This is what happened:"); // Console
   console.log(compHand + "_versus_" + userHand); // Console
+
+  for (let index = 0; index < hands.length; index++) {
+    if (index !== userHand && index !== compHand) {
+      hideSection(hands[index]);
+    }
+  }
 
   if (compHand === userHand) {
     console.log("Damn it! It's a tie!"); // Console
