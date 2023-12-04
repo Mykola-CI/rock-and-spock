@@ -1,6 +1,5 @@
 // Setting event listener on the DOM load
 document.addEventListener("DOMContentLoaded", function () {
-
   // Arranging visibility of DOM elements on the first (landing) screen
   displaySection("intro");
   hideSection("playground");
@@ -10,10 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   hideSection("footer--round-count");
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
-  
-  // Setting event listener for the only button on the intro screen 
-  goPlaygroundButton.addEventListener("click", function () {
 
+  // Setting event listener for the only button on the intro screen
+  goPlaygroundButton.addEventListener("click", function () {
     // Change the the Intro screen to the Playground one
     hideSection("intro");
     displaySection("playground");
@@ -45,10 +43,9 @@ const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 
 const startRoundBtn = document.getElementById("start-control--button");
 
-// Setting event listener for the only button on the Playground screen 
+// Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
-
- // Change the Playground screen to display 5 hands and clock-ticking 
+  // Change the Playground screen to display 5 hands and clock-ticking
   hideSection("intro");
   hideSection("playground");
   displaySection("clock-countdown");
@@ -56,21 +53,21 @@ startRoundBtn.addEventListener("click", function () {
   hideSection("footer--score");
   hideSection("footer--round-count");
 
-  let nComp = getComputerHand();
-  console.log("This is Computers choice: " + nComp); // Console
+  let indexComp = getComputerHand();
+  console.log("This is Computers choice: " + indexComp); // Console
 
   let timeoutID = setTimeout(function () {
-    defineWinner(nComp, 6);
-    console.log(nComp + ": nobody seems to have picked the hand"); // Console
+    indexUser = 5;
+    console.log(indexComp + ": nobody seems to have picked the hand"); // Console
+    defineWinner(indexComp, indexUser);
   }, 3000);
 
-  hands.forEach((hand, index) => {
+  hands.forEach((hand, indexUser) => {
     document.getElementById(hand).addEventListener("click", function () {
       clearTimeout(timeoutID);
-
-      defineWinner(nComp, index);
       console.log("This is User's choice: " + hand); // Console
-      console.log("This is User's index: " + index);  // Console
+      console.log("This is User's index: " + indexUser); // Console
+      defineWinner(indexComp, indexUser);
     });
   });
 });
@@ -80,6 +77,22 @@ function getComputerHand() {
 }
 
 function defineWinner(compHand, userHand) {
-  console.log("This is what happened:");
-  console.log(compHand + "_versus_" + userHand);
+  console.log("This is what happened:"); // Console
+  console.log(compHand + "_versus_" + userHand); // Console
+
+  if (compHand === userHand) {
+    console.log("Damn it! It's a tie!"); // Console
+  } else if (
+    (userHand === 0 && (compHand === 2 || compHand === 3)) ||
+    (userHand === 1 && (compHand === 0 || compHand === 4)) ||
+    (userHand === 2 && (compHand === 1 || compHand === 3)) ||
+    (userHand === 3 && (compHand === 1 || compHand === 4)) ||
+    (userHand === 4 && (compHand === 0 || compHand === 2))
+  ) {
+    console.log(`You win! ${hands[userHand]} beats ${hands[compHand]}`); // Console
+  } else if (userHand === 5) {
+    console.log(`Oi! You haven't picked a hand! Pity, but you loose anyway!`); // Console
+  } else {
+    console.log(`Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}`); // Console
+  }
 }
