@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   displaySection("intro");
   hideSection("playground");
   hideSection("clock-countdown");
+  hideSection("display-result");
   hideSection("hand-selection");
   hideSection("footer--score");
   hideSection("footer--round-count");
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     hideSection("intro");
     displaySection("playground");
     hideSection("clock-countdown");
+    hideSection("display-result");
     hideSection("hand-selection");
     hideSection("footer--score");
     hideSection("footer--round-count");
@@ -49,6 +51,7 @@ startRoundBtn.addEventListener("click", function () {
   hideSection("intro");
   hideSection("playground");
   displaySection("clock-countdown");
+  hideSection("display-result");
   displaySection("hand-selection");
   hideSection("footer--score");
   hideSection("footer--round-count");
