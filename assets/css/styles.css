@@ -93,6 +93,11 @@ section {
   color: white;
 }
 
+#clock-countdown {
+  margin-top: 100px;
+  padding: 2rem 1rem;
+}
+
 #clock-countdown img {
   width: 200px;
   margin-left: 50%;
@@ -109,24 +114,22 @@ section {
 }
 
 .hand-type {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   height: 200px;
   width: 140px;
   border: 2px solid darkorange;
   text-align: center;
 }
 
-.hand-type button {
-  padding: 0.5rem;
-  margin: auto;
+.hand-type img {
+  max-width: 100%;
 }
 
 footer {
-  /* flex-shrink: 0; */
   position: fixed;
   z-index: 99;
   bottom: 0;
-  /* left: 50%;
-  transform: translateX(-50%); */
   width: min(100vw, 1200px);
   min-height: 50px;
   background-color: black;
