@@ -9,14 +9,17 @@
       name="description"
       content="Rock and Spock. Online game Rock Scissors Paper Lizard Spock. As made famous by Big Bang Theory series episodes" />
     <meta name="keywords" content="rock, scissors, paper, lizard, spock, online game, simple game, fun game, game of chance" />
+    
     <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Rock and Spock</title>
   </head>
+
   <body>
     <header><h1>Playground Rock & Spock</h1></header>
+
     <main>
       <section id="intro" class="section-flex-column">
-        <div id="intro-video"><img src="assets/images/rpsls-diagram.png" alt="the diagram showing how to define a winner"></div>
+        <div id="intro-video"><img src="assets/images/rpsls-diagram.png" alt="the diagram showing how to define a winner" /></div>
         <div id="start-playground">
           <button id="start-playground--button">Hurry to the Playground!</button>
         </div>
@@ -42,6 +45,7 @@
           </div>
         </div>
       </section>
+
       <section id="playground" class="section-flex-column">
         <div class="run-game">
           <h2>This is where the game starts</h2>
@@ -50,28 +54,34 @@
           <button id="start-control--button">Eager to Start?<br />Go on, Click!</button>
         </div>
       </section>
+
       <section id="clock-countdown" class="section-flex-column">
         <div><img src="assets/images/clock-ticking.gif" alt="Man running around clock face" /></div>
       </section>
+
       <section id="display-result" class="section-flex-column"><h2 id="display-result--title"></h2></section>
+
       <section id="hand-selection">
         <div class="hand-type section-flex-column">
-          <button id="rock" data-choice="0"><img src="assets/images/stone.png" alt="hand imitates stone"></button>
+          <button id="rock" class="hand-type--button"><img src="assets/images/stone.png" alt="hand imitates stone" /></button>
         </div>
         <div class="hand-type section-flex-column">
-          <button id="paper" data-choice="1"><img src="assets/images/paper.png" alt="hand imitates paper"></button>
+          <button id="paper" class="hand-type--button"><img src="assets/images/paper.png" alt="hand imitates paper" /></button>
         </div>
         <div class="hand-type section-flex-column">
-          <button id="scissors" data-choice="2"><img src="assets/images/scissors.png" alt="hand imitates scissors"></button>
+          <button id="scissors" class="hand-type--button"><img src="assets/images/scissors.png" alt="hand imitates scissors" /></button>
         </div>
         <div class="hand-type section-flex-column">
-          <button id="lizard" data-choice="3"><img src="assets/images/lizard.png" alt="hand imitates lizard"></button>
+          <button id="lizard" class="hand-type--button"><img src="assets/images/lizard.png" alt="hand imitates lizard" /></button>
         </div>
         <div class="hand-type section-flex-column">
-          <button id="spock" data-choice="4"><img src="assets/images/spock.png" alt="hand imitates the traditional greeting of Spock"></button>
+          <button id="spock" class="hand-type--button">
+            <img src="assets/images/spock.png" alt="hand imitates the traditional greeting of Spock" />
+          </button>
         </div>
       </section>
     </main>
+
     <footer>
       <div id="footer--score">1 : 1</div>
       <div id="footer-title">
