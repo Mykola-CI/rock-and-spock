@@ -39,6 +39,10 @@ section {
   justify-content: space-around;
 }
 
+#intro {
+  margin-top: 100px;
+}
+
 #intro-video {
   min-height: fit-content;
   background-color: antiquewhite;
@@ -51,9 +55,9 @@ section {
 }
 
 #start-playground {
-  display: inherit;
+  /* display: inherit;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; */
   align-items: center;
   min-height: 100px;
   background-color: aqua;
@@ -62,7 +66,6 @@ section {
 #start-playground--button {
   width: 200px;
   height: 50px;
-  /* margin: auto; */
   padding: 1rem;
 }
 
@@ -85,6 +88,7 @@ section {
 }
 
 #playground {
+  margin-top: 100px;
   min-height: 200px;
   background-color: black;
   text-align: center;
@@ -113,13 +117,12 @@ section {
   margin-top: 100px;
   min-height: 150px;
   background-color: darkblue;
-  /* display: flex;
-  flex-direction: column; */
+  color: white;
+  align-items: center;
 }
 
 #display-result--title {
-  margin: auto;
-  color: white;
+  /* margin: auto; */
   text-transform: capitalize;
 }
 

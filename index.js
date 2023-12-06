@@ -15,6 +15,7 @@ const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
 let timeoutID;
+// let timeoutReturn;
 
 // Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
@@ -26,6 +27,12 @@ startRoundBtn.addEventListener("click", function () {
   displaySection("hand-selection");
   hideSection("footer--score");
   hideSection("footer--round-count");
+
+  // This loop reinstates availability of 'inactive' hands hidden at the previous round
+  // - refer to the respective loop in defineWinner function
+  for (let index = 0; index < hands.length; index++) {
+    displaySection(hands[index]);
+  }
 
   timeoutID = setTimeout(function () {
     hideSection("clock-countdown");
@@ -95,7 +102,6 @@ function handClickHandler(event) {
   clearTimeout(timeoutID);
   hideSection("clock-countdown");
   displaySection("display-result");
-  console.log("this is the test for retrieving id: " + clickedHandId); // console
   const indexUser = hands.indexOf(clickedHandId);
   defineWinner(indexUser);
 }
@@ -112,13 +118,14 @@ function removeHandEventListeners() {
 }
 
 /**
- * Major function that randomly generates computer's hand
- * Executes the logic of defining the winner and displaying the result messages 
- * @param {*} userHand 
+ * Major function that randomly generates computer's hand.
+ * Executes the logic of defining the winner and display the result messages
+ * @param {*} userHand
  */
 function defineWinner(userHand) {
   let indexComp = Math.floor(Math.random() * 5);
 
+  // This loop hides inactive hands left after Player and Computer have picked theirs
   for (let index = 0; index < hands.length; index++) {
     if (index !== userHand && index !== indexComp) {
       hideSection(hands[index]);
@@ -127,7 +134,6 @@ function defineWinner(userHand) {
 
   if (indexComp === userHand) {
     document.getElementById("display-result--title").innerText = "Damn! It's a tie!";
-    console.log("Damn it! It's a tie!"); // Console
   } else if (
     (userHand === 0 && (indexComp === 2 || indexComp === 3)) ||
     (userHand === 1 && (indexComp === 0 || indexComp === 4)) ||
@@ -135,12 +141,23 @@ function defineWinner(userHand) {
     (userHand === 3 && (indexComp === 1 || indexComp === 4)) ||
     (userHand === 4 && (indexComp === 0 || indexComp === 2))
   ) {
-    document.getElementById("display-result--title").innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}`;
+    document.getElementById("display-result--title").innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}  👍`;
   } else if (userHand === 5) {
-    document.getElementById("display-result--title").innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!`;
+    document.getElementById("display-result--title").innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
   } else {
-    document.getElementById("display-result--title").innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}`;
+    document.getElementById("display-result--title").innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
   }
 
   removeHandEventListeners();
+  document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
+
+  let timeoutReturn = setTimeout(function () {
+    displayPlayground();
+  }, 5000);
+
+  let displayResultDiv = document.getElementById("display-result");
+  displayResultDiv.addEventListener("click", function () {
+    clearTimeout(timeoutReturn);
+    displayPlayground();
+  });
 }
