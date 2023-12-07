@@ -1,12 +1,14 @@
 // Setting event listener on the Window load
 window.onload = (event) => {
-  displayIntroScreen();
+  displaySectionClass(".display-intro");
+  hideSectionClass(".hide-intro");
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
 
   // Setting event listener for the only button on the intro screen
   goPlaygroundButton.addEventListener("click", function () {
-    displayPlayground();
+    displaySectionClass(".display-playground");
+    hideSectionClass(".hide-playground");
   });
 };
 
@@ -15,18 +17,12 @@ const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
 let timeoutID;
-// let timeoutReturn;
 
 // Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
   // Change the Playground screen to display 5 hands and clock-ticking
-  hideSection("intro");
-  hideSection("playground");
-  displaySection("clock-countdown");
-  hideSection("display-result");
-  displaySection("hand-selection");
-  hideSection("footer--score");
-  hideSection("footer--round-count");
+  displaySectionClass(".display-clock-hands");
+  hideSectionClass(".hide-clock-hands");
 
   // This loop reinstates availability of 'inactive' hands hidden at the previous round
   // - refer to the respective loop in defineWinner function
@@ -39,7 +35,7 @@ startRoundBtn.addEventListener("click", function () {
     hideSection("hand-selection");
     displaySection("display-result");
     defineWinner(5);
-  }, 3000);
+  }, 5000);
 
   handButtons.forEach((handButton) => {
     handButton.addEventListener("click", handClickHandler);
@@ -47,35 +43,7 @@ startRoundBtn.addEventListener("click", function () {
 });
 
 /**
- * A combination of hide and display function calls is grouped
- * to display Introductory Screen
- */
-function displayIntroScreen() {
-  displaySection("intro");
-  hideSection("playground");
-  hideSection("clock-countdown");
-  hideSection("display-result");
-  hideSection("hand-selection");
-  hideSection("footer--score");
-  hideSection("footer--round-count");
-}
-
-/**
- * A combination of hide and display function calls is grouped
- * to display Playground Screen with Start Round button
- */
-function displayPlayground() {
-  hideSection("intro");
-  displaySection("playground");
-  hideSection("clock-countdown");
-  hideSection("display-result");
-  hideSection("hand-selection");
-  hideSection("footer--score");
-  hideSection("footer--round-count");
-}
-
-/**
- * Function hiding the section with the specified id
+ * Function hiding a section with a specified id
  * @param {*} id
  */
 function hideSection(id) {
@@ -84,12 +52,34 @@ function hideSection(id) {
 }
 
 /**
- * Function displaying the section with the specified id
+ * Function hiding all sections with a specified class name
+ * @param {*} id
+ */
+function hideSectionClass(className) {
+  const elements = document.querySelectorAll(className);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].classList.add("hidden");
+  }
+}
+
+/**
+ * Function displaying a section with a specified id
  * @param {*} id
  */
 function displaySection(id) {
   const displayElement = document.getElementById(id);
   displayElement.classList.remove("hidden");
+}
+
+/**
+ * Function displaying all sections with a specified class name
+ * @param {*} id
+ */
+function displaySectionClass(className) {
+  const elements = document.querySelectorAll(className);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].classList.remove("hidden");
+  }
 }
 
 /**
@@ -142,22 +132,40 @@ function defineWinner(userHand) {
     (userHand === 4 && (indexComp === 0 || indexComp === 2))
   ) {
     document.getElementById("display-result--title").innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}  👍`;
+    incrementScorePlayer();
   } else if (userHand === 5) {
     document.getElementById("display-result--title").innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
+    incrementScoreSheldon();
   } else {
-    document.getElementById("display-result--title").innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
+    document.getElementById(
+      "display-result--title"
+    ).innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
+    incrementScoreSheldon();
   }
 
   removeHandEventListeners();
+
   document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
 
   let timeoutReturn = setTimeout(function () {
-    displayPlayground();
-  }, 5000);
+    displaySectionClass(".display-playground");
+    hideSectionClass(".hide-playground");
+  }, 10000);
 
   let displayResultDiv = document.getElementById("display-result");
   displayResultDiv.addEventListener("click", function () {
     clearTimeout(timeoutReturn);
-    displayPlayground();
+    displaySectionClass(".display-playground");
+    hideSectionClass(".hide-playground");
   });
+}
+
+function incrementScorePlayer() {
+  let oldScore = parseInt(document.querySelector("#footer--you-score>h3").innerText);
+  document.querySelector("#footer--you-score>h3").innerText = ++oldScore;
+}
+
+function incrementScoreSheldon() {
+  let oldScore = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
+  document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScore;
 }
