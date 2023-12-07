@@ -16,6 +16,7 @@ window.onload = (event) => {
 const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
+let currentRoundCount;
 let timeoutID;
 let timeoutReturn;
 
@@ -25,6 +26,9 @@ startRoundBtn.addEventListener("click", function () {
   displaySectionClass(".display-clock-hands");
   hideSectionClass(".hide-clock-hands");
   incrementRoundCount();
+
+  currentRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
+  console.log("the current round is:  " + currentRoundCount);
 
   // This loop reinstates availability of 'inactive' hands hidden at the previous round
   // - refer to the respective loop in defineWinner function
@@ -37,7 +41,7 @@ startRoundBtn.addEventListener("click", function () {
     hideSection("hand-selection");
     displaySection("display-result");
     defineWinner(5);
-    console.log("this is check of timeout on Hand Click")
+    console.log("this is check of timeout on Hand Click");
   }, 5000);
 
   handButtons.forEach((handButton) => {
@@ -127,8 +131,6 @@ function defineWinner(userHand) {
 
   if (indexComp === userHand) {
     document.getElementById("display-result--title").innerText = "Damn! It's a tie!";
-    incrementScorePlayer();
-    incrementScoreSheldon();
   } else if (
     (userHand === 0 && (indexComp === 2 || indexComp === 3)) ||
     (userHand === 1 && (indexComp === 0 || indexComp === 4)) ||
@@ -153,16 +155,29 @@ function defineWinner(userHand) {
   // document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
 
   timeoutReturn = setTimeout(function () {
-    displaySectionClass(".display-playground");
-    hideSectionClass(".hide-playground");
-    console.log("This is check of timeout on BLUE click");
-  }, 10000);
+    if (currentRoundCount <= 9) {
+      displaySectionClass(".display-playground");
+      hideSectionClass(".hide-playground");
+    } else {
+      displaySectionClass(".display-intro");
+      hideSectionClass(".hide-intro");
+      clearScores();
+    }
+    console.log("the log from return to start round by timeout. Round Number: " + currentRoundCount);
+  }, 5000);
 
   let displayResultDiv = document.getElementById("display-result");
   displayResultDiv.addEventListener("click", function () {
     clearTimeout(timeoutReturn);
-    displaySectionClass(".display-playground");
-    hideSectionClass(".hide-playground");
+    if (currentRoundCount <= 9) {
+      displaySectionClass(".display-playground");
+      hideSectionClass(".hide-playground");
+    } else {
+      displaySectionClass(".display-intro");
+      hideSectionClass(".hide-intro");
+      clearScores();
+    }
+    console.log("the log from return to start round by click. Round Number: " + currentRoundCount);
   });
 }
 
@@ -179,4 +194,10 @@ function incrementScoreSheldon() {
 function incrementRoundCount() {
   let oldCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
   document.querySelector("#footer--round-count>h3").innerText = ++oldCount;
+}
+
+function clearScores() {
+  document.querySelector("#footer--round-count>h3").innerText = 0;
+  document.querySelector("#footer--sheldon-score>h3").innerText = 0;
+  document.querySelector("#footer--you-score>h3").innerText = 0;
 }
