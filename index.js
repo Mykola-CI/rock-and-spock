@@ -17,12 +17,14 @@ const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
 let timeoutID;
+let timeoutReturn;
 
 // Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
   // Change the Playground screen to display 5 hands and clock-ticking
   displaySectionClass(".display-clock-hands");
   hideSectionClass(".hide-clock-hands");
+  incrementRoundCount();
 
   // This loop reinstates availability of 'inactive' hands hidden at the previous round
   // - refer to the respective loop in defineWinner function
@@ -35,6 +37,7 @@ startRoundBtn.addEventListener("click", function () {
     hideSection("hand-selection");
     displaySection("display-result");
     defineWinner(5);
+    console.log("this is check of timeout on Hand Click")
   }, 5000);
 
   handButtons.forEach((handButton) => {
@@ -124,6 +127,8 @@ function defineWinner(userHand) {
 
   if (indexComp === userHand) {
     document.getElementById("display-result--title").innerText = "Damn! It's a tie!";
+    incrementScorePlayer();
+    incrementScoreSheldon();
   } else if (
     (userHand === 0 && (indexComp === 2 || indexComp === 3)) ||
     (userHand === 1 && (indexComp === 0 || indexComp === 4)) ||
@@ -145,11 +150,12 @@ function defineWinner(userHand) {
 
   removeHandEventListeners();
 
-  document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
+  // document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
 
-  let timeoutReturn = setTimeout(function () {
+  timeoutReturn = setTimeout(function () {
     displaySectionClass(".display-playground");
     hideSectionClass(".hide-playground");
+    console.log("This is check of timeout on BLUE click");
   }, 10000);
 
   let displayResultDiv = document.getElementById("display-result");
@@ -168,4 +174,9 @@ function incrementScorePlayer() {
 function incrementScoreSheldon() {
   let oldScore = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
   document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScore;
+}
+
+function incrementRoundCount() {
+  let oldCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
+  document.querySelector("#footer--round-count>h3").innerText = ++oldCount;
 }
