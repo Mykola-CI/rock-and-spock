@@ -56,9 +56,9 @@ section {
   text-align: center;
 }
 
-#intro-video img {
+#intro-video video {
   padding: 1rem;
-  max-width: 300px;
+  width: clamp(100px, 90%, 400px)
 }
 
 #start-playground {

@@ -4,11 +4,13 @@ window.onload = (event) => {
   hideSectionClass(".hide-intro");
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
-
+  const video = document.querySelector("#intro-video>video");
   // Setting event listener for the only button on the intro screen
   goPlaygroundButton.addEventListener("click", function () {
     displaySectionClass(".display-playground");
     hideSectionClass(".hide-playground");
+    video.pause();
+    video.currentTime = 0;
   });
 };
 
@@ -21,8 +23,8 @@ let timeoutID;
 let timeoutReturn;
 
 let headers = document.querySelectorAll("header");
-headers.forEach(header => {
-  header.addEventListener("click", function() {
+headers.forEach((header) => {
+  header.addEventListener("click", function () {
     displaySectionClass(".display-intro");
     hideSectionClass(".hide-intro");
   });
