@@ -15,17 +15,24 @@ body {
 }
 
 header {
+  width: min(90vw, 1000px);
   background: brown;
   color: white;
   text-align: center;
   flex-shrink: 0;
+  padding: 1rem;
+}
+
+header > h3 {
+  padding-top: 1rem;
+  letter-spacing: 3px;
 }
 
 main {
   width: min(90vw, 1000px);
   flex-grow: 1;
   overflow: auto;
-  margin-bottom: 122.5px;
+  margin-bottom: 150px;
 }
 
 section {
@@ -174,7 +181,7 @@ footer > div {
 }
 
 #footer--item-you {
-grid-area: 1 / 1 / 2 / 2;
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 #footer--you-score {

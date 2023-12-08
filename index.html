@@ -9,16 +9,24 @@
       name="description"
       content="Rock and Spock. Online game Rock Scissors Paper Lizard Spock. As made famous by Big Bang Theory series episodes" />
     <meta name="keywords" content="rock, scissors, paper, lizard, spock, online game, simple game, fun game, game of chance" />
-    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
+      integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Rock and Spock</title>
   </head>
 
   <body>
-    <header><h1>Playground Rock & Spock</h1></header>
+    <header>
+      <h1>Welcome to the Realm of Rock & Spock</h1>
+      <h3 class="hide-intro display-playground">☝️ Click here if you want to return to the intro screen 👆</h3>
+    </header>
 
     <main>
       <section id="intro" class="display-intro hide-playground section-flex-column">
+        <h2>ROCK || PAPER || SCISSORS || LIZARD || SPOCK</h2>
         <div id="intro-video"><img src="assets/images/rpsls-diagram.png" alt="the diagram showing how to define a winner" /></div>
         <div id="start-playground" class="section-flex-column">
           <button id="start-playground--button">Hurry to the Playground!</button>
@@ -72,7 +80,9 @@
           <button id="paper" class="hand-type--button"><img src="assets/images/paper.png" alt="hand imitates paper" /></button>
         </div>
         <div class="hand-type section-flex-column">
-          <button id="scissors" class="hand-type--button"><img src="assets/images/scissors.png" alt="hand imitates scissors" /></button>
+          <button id="scissors" class="hand-type--button">
+            <img src="assets/images/scissors.png" alt="hand imitates scissors" />
+          </button>
         </div>
         <div class="hand-type section-flex-column">
           <button id="lizard" class="hand-type--button"><img src="assets/images/lizard.png" alt="hand imitates lizard" /></button>

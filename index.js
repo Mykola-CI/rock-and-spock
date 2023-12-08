@@ -20,6 +20,14 @@ let currentRoundCount;
 let timeoutID;
 let timeoutReturn;
 
+let headers = document.querySelectorAll("header");
+headers.forEach(header => {
+  header.addEventListener("click", function() {
+    displaySectionClass(".display-intro");
+    hideSectionClass(".hide-intro");
+  });
+});
+
 // Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
   // Change the Playground screen to display 5 hands and clock-ticking
@@ -169,7 +177,7 @@ function defineWinner(userHand) {
   let displayResultDiv = document.getElementById("display-result");
   displayResultDiv.addEventListener("click", function () {
     clearTimeout(timeoutReturn);
-    if (currentRoundCount <= 9) {
+    if (currentRoundCount <= 3) {
       displaySectionClass(".display-playground");
       hideSectionClass(".hide-playground");
     } else {
@@ -177,7 +185,6 @@ function defineWinner(userHand) {
       hideSectionClass(".hide-intro");
       clearScores();
     }
-    console.log("the log from return to start round by click. Round Number: " + currentRoundCount);
   });
 }
 
