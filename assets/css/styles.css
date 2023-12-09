@@ -121,12 +121,21 @@ width: 100%;
 #clock-countdown {
   margin-top: 100px;
   padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.countdown-numbers {
+  padding: 1rem;
+  font-size: 400%;
 }
 
 #clock-countdown img {
   width: 200px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  /* margin-left: 50%;
+  transform: translateX(-50%); */
 }
 
 #display-result {

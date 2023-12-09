@@ -5,7 +5,6 @@ window.onload = (event) => {
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
-  const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
   // Setting event listener for the only button on the intro screen
   goPlaygroundButton.addEventListener("click", function () {
     audioClick.play();
@@ -21,10 +20,13 @@ const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
-const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav")
+const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 let currentRoundCount;
 let timeoutID;
 let timeoutReturn;
+let countdownValue;
+let countdownInterval;
+let countdownDisplays = document.querySelectorAll(".countdown-numbers");
 
 let headers = document.querySelectorAll("header");
 headers.forEach((header) => {
@@ -43,7 +45,6 @@ startRoundBtn.addEventListener("click", function () {
   incrementRoundCount();
 
   currentRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
-  console.log("the current round is:  " + currentRoundCount);
 
   // This loop reinstates availability of 'inactive' hands hidden at the previous round
   // - refer to the respective loop in defineWinner function
@@ -51,12 +52,23 @@ startRoundBtn.addEventListener("click", function () {
     displaySection(hands[index]);
   }
 
+  countdownValue = 5;
+  countdownDisplays.forEach((display) => display.innerText = countdownValue);
+  countdownInterval = setInterval(function () {
+    countdownValue--;
+    if (countdownValue < 0) {
+      clearInterval(countdownInterval);
+      countdownDisplays.forEach((display) => display.innerText = "")
+    } else {
+      countdownDisplays.forEach((display) => display.innerText = countdownValue);
+    }
+  }, 1000);
+
   timeoutID = setTimeout(function () {
     hideSection("clock-countdown");
     hideSection("hand-selection");
     displaySection("display-result");
     defineWinner(5);
-    console.log("this is check of timeout on Hand Click");
   }, 5000);
 
   handButtons.forEach((handButton) => {
@@ -113,6 +125,8 @@ function handClickHandler(event) {
   audioPick.play();
   const clickedHandId = event.currentTarget.id;
   clearTimeout(timeoutID);
+  clearInterval(countdownInterval);
+  countdownDisplays.forEach((display) => display.innerText = "");
   hideSection("clock-countdown");
   displaySection("display-result");
   const indexUser = hands.indexOf(clickedHandId);
