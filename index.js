@@ -5,8 +5,10 @@ window.onload = (event) => {
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
+  const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
   // Setting event listener for the only button on the intro screen
   goPlaygroundButton.addEventListener("click", function () {
+    audioClick.play();
     displaySectionClass(".display-playground");
     hideSectionClass(".hide-playground");
     video.pause();
@@ -18,6 +20,8 @@ window.onload = (event) => {
 const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control--button");
+const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
+const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav")
 let currentRoundCount;
 let timeoutID;
 let timeoutReturn;
@@ -32,6 +36,7 @@ headers.forEach((header) => {
 
 // Setting event listener for the only button on the Playground screen
 startRoundBtn.addEventListener("click", function () {
+  audioClick.play();
   // Change the Playground screen to display 5 hands and clock-ticking
   displaySectionClass(".display-clock-hands");
   hideSectionClass(".hide-clock-hands");
@@ -105,6 +110,7 @@ function displaySectionClass(className) {
  * @param {*} event
  */
 function handClickHandler(event) {
+  audioPick.play();
   const clickedHandId = event.currentTarget.id;
   clearTimeout(timeoutID);
   hideSection("clock-countdown");

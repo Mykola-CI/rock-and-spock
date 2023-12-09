@@ -42,7 +42,7 @@ section {
 .section-flex-column {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-around;
 }
 
@@ -62,10 +62,7 @@ section {
 }
 
 #start-playground {
-  /* display: inherit;
-  flex-direction: column;
-  justify-content: center; */
-  align-items: center;
+width: 100%;
   min-height: 100px;
   background-color: aqua;
 }
@@ -81,6 +78,7 @@ section {
 }
 
 #game-rules {
+  width: 100%;
   min-height: fit-content;
   background-color: blue;
   color: white;
@@ -107,6 +105,17 @@ section {
 
 .run-game h2 {
   color: white;
+}
+
+#playground :last-child {
+  max-width: 300px;
+  padding: 1rem;
+}
+
+#playground :last-child img {
+  width: 100%;
+  padding: 0;
+  border: 4px solid white;
 }
 
 #clock-countdown {
@@ -167,17 +176,18 @@ footer {
 }
 
 footer > div {
-  height: 100px;
+  min-height: 100px;
   display: grid;
-  grid-template-columns: 3fr 1fr 3fr 14fr 3fr 3fr;
+  grid-template-columns: 10% 4% 10% 1fr 25%;
   grid-template-rows: 1fr 1fr;
   justify-items: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .footer--grid-item {
-  padding: 1rem 2rem;
+  padding: min(2vw, 1rem) min(3vw, 2rem);
 }
 
 #footer--item-you {
@@ -208,11 +218,11 @@ footer > div {
 }
 
 #footer--item-round {
-  grid-area: 1 / 5 / 2 / 7;
+  grid-area: 1 / 5 / 2 / 6;
 }
 
 #footer--round-count {
-  grid-area: 2 / 5 / 3 / 7;
+  grid-area: 2 / 5 / 3 / 6;
   border: 2px solid white;
 }
 
