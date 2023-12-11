@@ -8,17 +8,21 @@ window.onload = (event) => {
   // Setting event listener for the only button on the intro screen
   goPlaygroundButton.addEventListener("click", function () {
     audioClick.play();
-    displaySectionClass(".display-playground");
-    hideSectionClass(".hide-playground");
     video.pause();
     video.currentTime = 0;
+    displaySectionClass(".display-playground");
+    hideSectionClass(".hide-playground");
+    let lastRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
+    if (lastRoundCount > 3) {
+      clearScores();
+    }
   });
 };
 
 // Array that consists of strings - id selectors of 5 available gaming hands
 const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
-const startRoundBtn = document.getElementById("start-control--button");
+const startRoundBtn = document.querySelectorAll("#start-control");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 let currentRoundCount;
@@ -37,42 +41,44 @@ headers.forEach((header) => {
 });
 
 // Setting event listener for the only button on the Playground screen
-startRoundBtn.addEventListener("click", function () {
-  audioClick.play();
-  // Change the Playground screen to display 5 hands and clock-ticking
-  displaySectionClass(".display-clock-hands");
-  hideSectionClass(".hide-clock-hands");
-  incrementRoundCount();
+startRoundBtn.forEach((starter) => {
+  starter.addEventListener("click", function () {
+    audioClick.play();
+    // Change the Playground screen to display 5 hands and clock-ticking
+    displaySectionClass(".display-clock-hands");
+    hideSectionClass(".hide-clock-hands");
+    incrementRoundCount();
 
-  currentRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
+    currentRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
 
-  // This loop reinstates availability of 'inactive' hands hidden at the previous round
-  // - refer to the respective loop in defineWinner function
-  for (let index = 0; index < hands.length; index++) {
-    displaySection(hands[index]);
-  }
-
-  countdownValue = 5;
-  countdownDisplays.forEach((display) => display.innerText = countdownValue);
-  countdownInterval = setInterval(function () {
-    countdownValue--;
-    if (countdownValue < 0) {
-      clearInterval(countdownInterval);
-      countdownDisplays.forEach((display) => display.innerText = "")
-    } else {
-      countdownDisplays.forEach((display) => display.innerText = countdownValue);
+    // This loop reinstates availability of 'inactive' hands hidden at the previous round
+    // - refer to the respective loop in defineWinner function
+    for (let index = 0; index < hands.length; index++) {
+      displaySection(hands[index]);
     }
-  }, 1000);
 
-  timeoutID = setTimeout(function () {
-    hideSection("clock-countdown");
-    hideSection("hand-selection");
-    displaySection("display-result");
-    defineWinner(5);
-  }, 5000);
+    countdownValue = 5;
+    countdownDisplays.forEach((display) => (display.innerText = countdownValue));
+    countdownInterval = setInterval(function () {
+      countdownValue--;
+      if (countdownValue < 0) {
+        clearInterval(countdownInterval);
+        countdownDisplays.forEach((display) => (display.innerText = ""));
+      } else {
+        countdownDisplays.forEach((display) => (display.innerText = countdownValue));
+      }
+    }, 1000);
 
-  handButtons.forEach((handButton) => {
-    handButton.addEventListener("click", handClickHandler);
+    timeoutID = setTimeout(function () {
+      hideSection("clock-countdown");
+      hideSection("hand-selection");
+      displaySection("display-result");
+      defineWinner(5);
+    }, 5000);
+
+    handButtons.forEach((handButton) => {
+      handButton.addEventListener("click", handClickHandler);
+    });
   });
 });
 
@@ -126,7 +132,7 @@ function handClickHandler(event) {
   const clickedHandId = event.currentTarget.id;
   clearTimeout(timeoutID);
   clearInterval(countdownInterval);
-  countdownDisplays.forEach((display) => display.innerText = "");
+  countdownDisplays.forEach((display) => (display.innerText = ""));
   hideSection("clock-countdown");
   displaySection("display-result");
   const indexUser = hands.indexOf(clickedHandId);
@@ -182,21 +188,19 @@ function defineWinner(userHand) {
 
   removeHandEventListeners();
 
-  // document.getElementById("display-return-to-round").innerText = `Hit anywhere on this Blue Box to begin a new Round!`;
-
   timeoutReturn = setTimeout(function () {
-    if (currentRoundCount <= 9) {
+    if (currentRoundCount <= 3) {
       displaySectionClass(".display-playground");
       hideSectionClass(".hide-playground");
     } else {
       displaySectionClass(".display-intro");
       hideSectionClass(".hide-intro");
-      clearScores();
+      lastGameResults();
     }
-    console.log("the log from return to start round by timeout. Round Number: " + currentRoundCount);
-  }, 5000);
+  }, 10000);
 
   let displayResultDiv = document.getElementById("display-result");
+
   displayResultDiv.addEventListener("click", function () {
     clearTimeout(timeoutReturn);
     if (currentRoundCount <= 3) {
@@ -205,19 +209,25 @@ function defineWinner(userHand) {
     } else {
       displaySectionClass(".display-intro");
       hideSectionClass(".hide-intro");
-      clearScores();
+      lastGameResults();
     }
   });
 }
 
 function incrementScorePlayer() {
-  let oldScore = parseInt(document.querySelector("#footer--you-score>h3").innerText);
-  document.querySelector("#footer--you-score>h3").innerText = ++oldScore;
+  let oldScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
+  // lastScorePlayer = oldScorePlayer + 1;
+  // console.log("Score Player = " + lastScorePlayer);
+  // document.querySelector("#footer--sheldon-score>h3").innerText = lastScorePlayer;
+  document.querySelector("#footer--you-score>h3").innerText = ++oldScorePlayer;
 }
 
 function incrementScoreSheldon() {
-  let oldScore = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
-  document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScore;
+  let oldScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
+  // lastScoreSheldon = oldScoreSheldon + 1;
+  // console.log("Score Sheldon = " + lastScoreSheldon);
+  // document.querySelector("#footer--sheldon-score>h3").innerText = lastScoreSheldon;
+  document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScoreSheldon;
 }
 
 function incrementRoundCount() {
@@ -229,4 +239,21 @@ function clearScores() {
   document.querySelector("#footer--round-count>h3").innerText = 0;
   document.querySelector("#footer--sheldon-score>h3").innerText = 0;
   document.querySelector("#footer--you-score>h3").innerText = 0;
+  document.querySelector("#footer--item-title>h3").innerText = `Maximum Number Of Rounds Per Game = 10`;
+}
+
+function lastGameResults() {
+  let lastScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
+  let lastScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
+  if (lastScoreSheldon > lastScorePlayer) {
+    document.querySelector(
+      "#footer--item-title>h3"
+    ).innerText = `Regret to say but You lost the last game ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
+  } else if (lastScoreSheldon < lastScorePlayer) {
+    document.querySelector(
+      "#footer--item-title>h3"
+    ).innerText = `What can I say, You won the last game ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
+  } else {
+    document.querySelector("#footer--item-title>h3").innerText = `Miraculously You managed to tie with me! 🤔`;
+  }
 }

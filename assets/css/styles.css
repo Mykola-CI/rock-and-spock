@@ -16,6 +16,11 @@ body {
   align-items: center;
 }
 
+header,
+button {
+  cursor: pointer;
+}
+
 header {
   width: min(90vw, 1000px);
   background: brown;
@@ -80,7 +85,7 @@ section {
 }
 
 #intro {
-  margin-top: clamp(16px, 5vw, 100px);
+  margin-top: clamp(12px, 4vw, 100px);
 }
 
 #intro > h2 {
@@ -130,39 +135,61 @@ section {
 }
 
 #playground {
-  margin-top: clamp(16px, 5vw, 100px);
+  margin-top: clamp(12px, 4vw, 100px);
   min-height: 200px;
   background-color: #16133C;
   text-align: center;
 }
+.stacked-grid {
+  color: white;
+  display: grid;
+}
 
-#start-control--button {
+.stacked-grid > * {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2; 
+}
+
+.stacked-grid > p {
+  align-self: center;
+}
+
+#start-control {
+  max-width: 350px;
   padding: 1rem;
+  background-color: #16133C;
+  border: none;
+}
+
+#start-control img {
+  width: 100%;
+  border: 16px solid rgb(106, 126, 75);
 }
 
 .run-game {
 width: 100%;
 padding: 1rem;
+color: white;
 }
 
 .run-game h2 {
-  color: white;
+  
   margin-inline: auto;
-  max-width: 500px;
+  max-width: 550px;
   padding: 0.5rem;
   border: 16px solid rgb(106, 126, 75);
 }
 
-#rules-diagram {
+/* #rules-diagram {
   max-width: 300px;
   padding: 1rem;
-}
+} */
 
-#rules-diagram img {
+/* #rules-diagram img {
   width: 100%;
   padding: 0.5rem;
   border: 16px solid rgb(106, 126, 75);
-}
+} */
 
 #clock-countdown {
   margin-top: 100px;
