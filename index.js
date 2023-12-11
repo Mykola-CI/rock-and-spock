@@ -22,7 +22,7 @@ window.onload = (event) => {
 // Array that consists of strings - id selectors of 5 available gaming hands
 const hands = ["rock", "paper", "scissors", "lizard", "spock"];
 const handButtons = document.querySelectorAll(".hand-type--button");
-const startRoundBtn = document.querySelectorAll("#start-control");
+const startRoundBtn = document.getElementById("start-control");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 let currentRoundCount;
@@ -32,17 +32,14 @@ let countdownValue;
 let countdownInterval;
 let countdownDisplays = document.querySelectorAll(".countdown-numbers");
 
-let headers = document.querySelectorAll("header");
-headers.forEach((header) => {
-  header.addEventListener("click", function () {
+let headers = document.querySelector("header");
+headers.addEventListener("click", function () {
     displaySectionClass(".display-intro");
     hideSectionClass(".hide-intro");
   });
-});
 
 // Setting event listener for the only button on the Playground screen
-startRoundBtn.forEach((starter) => {
-  starter.addEventListener("click", function () {
+startRoundBtn.addEventListener("click", function () {
     audioClick.play();
     // Change the Playground screen to display 5 hands and clock-ticking
     displaySectionClass(".display-clock-hands");
@@ -80,7 +77,6 @@ startRoundBtn.forEach((starter) => {
       handButton.addEventListener("click", handClickHandler);
     });
   });
-});
 
 /**
  * Function hiding a section with a specified id
@@ -188,45 +184,40 @@ function defineWinner(userHand) {
 
   removeHandEventListeners();
 
-  timeoutReturn = setTimeout(function () {
-    if (currentRoundCount <= 3) {
+let displayResultDiv = document.getElementById("display-result");
+
+  if (currentRoundCount <= 3) {
+    timeoutReturn = setTimeout(function () {
       displaySectionClass(".display-playground");
       hideSectionClass(".hide-playground");
-    } else {
+    }, 10000);
+    displayResultDiv.addEventListener("click", function () {
+      clearTimeout(timeoutReturn);
+      displaySectionClass(".display-playground");
+      hideSectionClass(".hide-playground");
+    });
+  } else {
+    timeoutReturn = setTimeout(function () {
       displaySectionClass(".display-intro");
       hideSectionClass(".hide-intro");
       lastGameResults();
-    }
-  }, 10000);
-
-  let displayResultDiv = document.getElementById("display-result");
-
-  displayResultDiv.addEventListener("click", function () {
-    clearTimeout(timeoutReturn);
-    if (currentRoundCount <= 3) {
-      displaySectionClass(".display-playground");
-      hideSectionClass(".hide-playground");
-    } else {
+    }, 10000);
+    displayResultDiv.addEventListener("click", function () {
+      clearTimeout(timeoutReturn);
       displaySectionClass(".display-intro");
       hideSectionClass(".hide-intro");
       lastGameResults();
-    }
-  });
+    });
+  }
 }
 
 function incrementScorePlayer() {
   let oldScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
-  // lastScorePlayer = oldScorePlayer + 1;
-  // console.log("Score Player = " + lastScorePlayer);
-  // document.querySelector("#footer--sheldon-score>h3").innerText = lastScorePlayer;
   document.querySelector("#footer--you-score>h3").innerText = ++oldScorePlayer;
 }
 
 function incrementScoreSheldon() {
   let oldScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
-  // lastScoreSheldon = oldScoreSheldon + 1;
-  // console.log("Score Sheldon = " + lastScoreSheldon);
-  // document.querySelector("#footer--sheldon-score>h3").innerText = lastScoreSheldon;
   document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScoreSheldon;
 }
 
@@ -248,12 +239,12 @@ function lastGameResults() {
   if (lastScoreSheldon > lastScorePlayer) {
     document.querySelector(
       "#footer--item-title>h3"
-    ).innerText = `Regret to say but You lost the last game ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
+    ).innerText = `Regret to say but You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
   } else if (lastScoreSheldon < lastScorePlayer) {
     document.querySelector(
       "#footer--item-title>h3"
-    ).innerText = `What can I say, You won the last game ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
+    ).innerText = `What can I say, You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
   } else {
-    document.querySelector("#footer--item-title>h3").innerText = `Miraculously You managed to tie with me! 🤔`;
+    document.querySelector("#footer--item-title>h3").innerText = `Miraculously, You managed to tie with me! 🤔`;
   }
 }

@@ -161,6 +161,11 @@ section {
   border: none;
 }
 
+#start-control :hover {
+  cursor: pointer;
+  border-color: azure;
+}
+
 #start-control img {
   width: 100%;
   border: 16px solid rgb(106, 126, 75);
