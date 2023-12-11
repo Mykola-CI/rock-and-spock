@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500&family=Life+Savers:wght@400;700;800&display=swap");
+
 *,
 * ::after,
 * ::before {
@@ -23,6 +25,37 @@ header {
   padding: 1rem;
 }
 
+h1,
+h2 {
+  font-family: "Life Savers", serif;
+}
+
+h3,
+p,
+li,
+button {
+  font-family: "Hind Madurai", sans-serif;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);;
+}
+
+h2 {
+  font-size: clamp(1rem, 3vw + 0.2rem, 1.5rem);
+  line-height: 150%;
+}
+
+h3 {
+  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);
+}
+
+p,
+li {
+  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);;
+}
+
+
 header > h3 {
   padding-top: 1rem;
   letter-spacing: 3px;
@@ -36,7 +69,7 @@ main {
 }
 
 section {
-  border: 4px solid black;
+  border: 4px solid #16133C;
 }
 
 .section-flex-column {
@@ -47,7 +80,15 @@ section {
 }
 
 #intro {
-  margin-top: 100px;
+  margin-top: clamp(16px, 5vw, 100px);
+}
+
+#intro > h2 {
+  letter-spacing: 2px;
+  line-height: 100% !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: center;
 }
 
 #intro-video {
@@ -58,11 +99,11 @@ section {
 
 #intro-video video {
   padding: 1rem;
-  width: clamp(100px, 90%, 400px)
+  width: min(500px, 100%);
 }
 
 #start-playground {
-width: 100%;
+  width: 100%;
   min-height: 100px;
   background-color: aqua;
 }
@@ -71,10 +112,6 @@ width: 100%;
   width: 200px;
   height: 50px;
   padding: 1rem;
-}
-
-#intro > h2 {
-  text-align: center;
 }
 
 #game-rules {
@@ -87,15 +124,15 @@ width: 100%;
 }
 
 #game-rules--content {
-  padding: 2rem 4rem;
+  padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 4rem);
   line-height: 150%;
   font-size: large;
 }
 
 #playground {
-  margin-top: 100px;
+  margin-top: clamp(16px, 5vw, 100px);
   min-height: 200px;
-  background-color: black;
+  background-color: #16133C;
   text-align: center;
 }
 
@@ -103,19 +140,28 @@ width: 100%;
   padding: 1rem;
 }
 
-.run-game h2 {
-  color: white;
+.run-game {
+width: 100%;
+padding: 1rem;
 }
 
-#playground :last-child {
+.run-game h2 {
+  color: white;
+  margin-inline: auto;
+  max-width: 500px;
+  padding: 0.5rem;
+  border: 16px solid rgb(106, 126, 75);
+}
+
+#rules-diagram {
   max-width: 300px;
   padding: 1rem;
 }
 
-#playground :last-child img {
+#rules-diagram img {
   width: 100%;
-  padding: 0;
-  border: 4px solid white;
+  padding: 0.5rem;
+  border: 16px solid rgb(106, 126, 75);
 }
 
 #clock-countdown {
@@ -124,7 +170,7 @@ width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
 .countdown-numbers {
@@ -179,7 +225,7 @@ footer {
   bottom: 0;
   width: min(100vw, 1200px);
   min-height: 150px;
-  background-color: black;
+  background-color: #16133C;
   color: white;
   padding: 1rem;
 }
