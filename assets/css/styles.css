@@ -171,6 +171,10 @@ section {
   border: 16px solid rgb(106, 126, 75);
 }
 
+#start-control p {
+  animation: glowing-text 3s infinite;
+}
+
 .run-game {
 width: 100%;
 padding: 1rem;
@@ -315,4 +319,25 @@ footer > div {
 
 .hidden {
   display: none !important;
+}
+
+
+@keyframes glowing {
+  0% {border-color: rgb(106, 126, 75);}
+  40% {border-color: #ffffff;}
+  60% {border-color: #ffffff;}
+  100% {border-color: rgb(106, 126, 75);}
+}
+
+@keyframes glowing-text {
+  0% {color: #16133C;}
+  40% {color: white}
+  60% {color: white;}
+  100% {color: #16133C;}
+}
+
+@media (hover: none) {
+  #start-control img {
+    animation: glowing 3s infinite;
+  }
 }
