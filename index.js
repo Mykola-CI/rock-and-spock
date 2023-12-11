@@ -109,7 +109,7 @@ function displaySection(id) {
 
 /**
  * Function displaying all sections with a specified class name
- * @param {*} id
+ * @param {*} className
  */
 function displaySectionClass(className) {
   const elements = document.querySelectorAll(className);
@@ -161,6 +161,7 @@ function defineWinner(userHand) {
     }
   }
 
+  // This condition defines Winner for the round and handles scores
   if (indexComp === userHand) {
     document.getElementById("display-result--title").innerText = "Damn! It's a tie!";
   } else if (
@@ -186,6 +187,7 @@ function defineWinner(userHand) {
 
 let displayResultDiv = document.getElementById("display-result");
 
+// The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen 
   if (currentRoundCount <= 3) {
     timeoutReturn = setTimeout(function () {
       displaySectionClass(".display-playground");
@@ -211,21 +213,33 @@ let displayResultDiv = document.getElementById("display-result");
   }
 }
 
+/**
+ * Increments the Player's score
+ */
 function incrementScorePlayer() {
   let oldScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
   document.querySelector("#footer--you-score>h3").innerText = ++oldScorePlayer;
 }
 
+/**
+ * Increments the Computer's score
+ */
 function incrementScoreSheldon() {
   let oldScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
   document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScoreSheldon;
 }
 
+/**
+ * Increments the number of rounds played
+ */
 function incrementRoundCount() {
   let oldCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
   document.querySelector("#footer--round-count>h3").innerText = ++oldCount;
 }
 
+/**
+ * Clears all scores to start a new round and assigns the initial text to the footer title  
+ */
 function clearScores() {
   document.querySelector("#footer--round-count>h3").innerText = 0;
   document.querySelector("#footer--sheldon-score>h3").innerText = 0;
@@ -233,6 +247,10 @@ function clearScores() {
   document.querySelector("#footer--item-title>h3").innerText = `Maximum Number Of Rounds Per Game = 10`;
 }
 
+/**
+ * Displays messages to the intro screen Footer about a Winner or a tie after the game has ended,
+ * i.e. the maximum number of rounds has been played  
+ */
 function lastGameResults() {
   let lastScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
   let lastScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
