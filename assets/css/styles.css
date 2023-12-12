@@ -30,6 +30,10 @@ header {
   padding: 1rem;
 }
 
+header:hover {
+  border: 6px solid red;
+}
+
 h1,
 h2 {
   font-family: "Life Savers", serif;
@@ -52,12 +56,13 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);
+  font-size: clamp(1rem, 2vw + 0.2rem, 1.2rem);
 }
 
 p,
-li {
-  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);;
+li,
+button {
+  font-size: clamp(1rem, 2vw + 0.2rem, 1.2rem);;
 }
 
 
@@ -85,20 +90,20 @@ section {
 }
 
 #intro {
-  margin-top: clamp(12px, 4vw, 100px);
+  margin-top: clamp(12px, 4vw, 40px);
 }
 
-#intro > h2 {
+#intro > :nth-child(1) {
   letter-spacing: 2px;
   line-height: 100% !important;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
 #intro-video {
   min-height: fit-content;
-  background-color: antiquewhite;
+  background-color: aqua;
   text-align: center;
 }
 
@@ -109,15 +114,49 @@ section {
 
 #start-playground {
   width: 100%;
-  min-height: 100px;
+  min-height: 10dvh;
   background-color: aqua;
 }
 
 #start-playground--button {
-  width: 200px;
-  height: 50px;
-  padding: 1rem;
+  width: min(90%, 200px);
+  height: 8dvh;
+  color: white;
+  text-shadow: 1px 1px 0px #7CACDE;
+  box-shadow: 1px 1px 1px #BEE2F9;
+  padding: 10px 25px;
+  border-radius: 20px;
+  border: 2px solid #3866A3;
+  background: #63B8EE;
+  background: linear-gradient(to top, #63B8EE, #2567a4);
 }
+
+/* .testbutton {
+  font-family: arial;
+  color: #14396A !important;
+  font-size: 14px;
+  text-shadow: 1px 1px 0px #7CACDE;
+  box-shadow: 1px 1px 1px #BEE2F9;
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: 2px solid #3866A3;
+  background: #63B8EE;
+  background: linear-gradient(to top, #63B8EE, #468CCF);
+} */
+#start-playground--button:hover {
+  /* color: #14396A !important; */
+  background: #468CCF;
+  background: linear-gradient(to top, #2567a4, #63B8EE);
+}
+
+#intro > :nth-child(4) {
+  letter-spacing: 2px;
+  /* line-height: 100% !important; */
+  padding-top: 20px;
+  padding-bottom: 6px;
+  text-align: center;
+}
+
 
 #game-rules {
   width: 100%;
@@ -135,10 +174,11 @@ section {
 }
 
 #playground {
-  margin-top: clamp(12px, 4vw, 100px);
+  margin-top: clamp(12px, 4vw, 60px);
   min-height: 200px;
   background-color: #16133C;
   text-align: center;
+  padding-bottom: clamp(12px, 2vw, 24px);
 }
 .stacked-grid {
   color: white;
@@ -158,17 +198,21 @@ section {
   max-width: 350px;
   padding: 1rem;
   background-color: #16133C;
-  border: none;
-}
-
-#start-control :hover {
-  cursor: pointer;
-  border-color: azure;
+  border: none; 
 }
 
 #start-control img {
   width: 100%;
-  border: 16px solid rgb(106, 126, 75);
+  border: 16px solid rgb(106, 126, 75); 
+}
+
+#start-control:hover img {
+  cursor: pointer;
+  border-color: azure;
+}
+
+#start-control:focus-within img {
+  border-color: azure;
 }
 
 #start-control p {
@@ -324,8 +368,8 @@ footer > div {
 
 @keyframes glowing {
   0% {border-color: rgb(106, 126, 75);}
-  40% {border-color: #ffffff;}
-  60% {border-color: #ffffff;}
+  40% {border-color: azure;}
+  60% {border-color: azure;}
   100% {border-color: rgb(106, 126, 75);}
 }
 
