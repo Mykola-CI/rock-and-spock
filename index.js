@@ -1,11 +1,18 @@
-// Setting event listener on the Window load
+/** 
+ * Setting event listener on the Window load to display intro screen 
+ * and provide for full functionality 
+ * */ 
 window.onload = (event) => {
   displaySectionClass(".display-intro");
   hideSectionClass(".hide-intro");
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
-  // Setting event listener for the only button on the intro screen
+
+/**
+ * Setting event listener for the only button on the intro screen that gets you 
+ * to the Playground screen
+ */
   goPlaygroundButton.addEventListener("click", function () {
     audioClick.play();
     video.pause();
@@ -19,43 +26,56 @@ window.onload = (event) => {
   });
 };
 
-// Array that consists of strings - id selectors of 5 available gaming hands
-const hands = ["rock", "paper", "scissors", "lizard", "spock"];
+const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
+const countdownDisplays = document.querySelectorAll(".countdown-numbers");
 let currentRoundCount;
 let timeoutID;
 let timeoutReturn;
 let countdownValue;
 let countdownInterval;
-let countdownDisplays = document.querySelectorAll(".countdown-numbers");
 
-let headers = document.querySelector("header");
+const headers = document.querySelector("header");
+/**
+ * Listens to the click inside the header area to return the player to the Intro screen
+ */
 headers.addEventListener("click", function () {
     displaySectionClass(".display-intro");
     hideSectionClass(".hide-intro");
   });
 
-// Setting event listener for the only button on the Playground screen
+const footerRoundCount = document.querySelector("#footer--round-count>h3");
+const displayResultTitle = document.getElementById("display-result--title");
+const footerYouScore = document.querySelector("#footer--you-score>h3");
+const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
+const footerItemTitle = document.querySelector("#footer--item-title>h3")
+
+/**
+ * the click event on the button starts a round, sets timeout and displays hands to pick
+ */
 startRoundBtn.addEventListener("click", function () {
     audioClick.play();
-    // Change the Playground screen to display 5 hands and clock-ticking
+    
     displaySectionClass(".display-clock-hands");
     hideSectionClass(".hide-clock-hands");
     incrementRoundCount();
 
-    currentRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
+    currentRoundCount = parseInt(footerRoundCount.innerText);
 
-    // This loop reinstates availability of 'inactive' hands hidden at the previous round
+    // This loop reinstates availability and visibility of 'inactive' hands hidden at the previous round
     // - refer to the respective loop in defineWinner function
     for (let index = 0; index < hands.length; index++) {
       displaySection(hands[index]);
     }
 
-    countdownValue = 5;
-    countdownDisplays.forEach((display) => (display.innerText = countdownValue));
+    countdownValue = 5; // this is for countdown starting from 5 in sec.
+    countdownDisplays.forEach((display) => (display.innerText = countdownValue)); // displays initial number of the countdown left and right from the running clock
+    /**
+     * Sets recurring intervals of 1 sec from 5 to 1 
+     */
     countdownInterval = setInterval(function () {
       countdownValue--;
       if (countdownValue < 0) {
@@ -66,6 +86,10 @@ startRoundBtn.addEventListener("click", function () {
       }
     }, 1000);
 
+    /**
+     * Sets the delay time 5sec for the function defineWinner to implement
+     * in case the Player fails to select the hand within 5 sec
+     */
     timeoutID = setTimeout(function () {
       hideSection("clock-countdown");
       hideSection("hand-selection");
@@ -73,6 +97,9 @@ startRoundBtn.addEventListener("click", function () {
       defineWinner(5);
     }, 5000);
 
+    /**
+     * On click event launches the handClickHandler function, which deals with the selected hand
+     */
     handButtons.forEach((handButton) => {
       handButton.addEventListener("click", handClickHandler);
     });
@@ -80,7 +107,6 @@ startRoundBtn.addEventListener("click", function () {
 
 /**
  * Function hiding a section with a specified id
- * @param {*} id
  */
 function hideSection(id) {
   const hideElement = document.getElementById(id);
@@ -89,7 +115,6 @@ function hideSection(id) {
 
 /**
  * Function hiding all sections with a specified class name
- * @param {*} id
  */
 function hideSectionClass(className) {
   const elements = document.querySelectorAll(className);
@@ -100,7 +125,6 @@ function hideSectionClass(className) {
 
 /**
  * Function displaying a section with a specified id
- * @param {*} id
  */
 function displaySection(id) {
   const displayElement = document.getElementById(id);
@@ -109,7 +133,6 @@ function displaySection(id) {
 
 /**
  * Function displaying all sections with a specified class name
- * @param {*} className
  */
 function displaySectionClass(className) {
   const elements = document.querySelectorAll(className);
@@ -121,7 +144,6 @@ function displaySectionClass(className) {
 /**
  * Rearranges the screen to reveal result and clears timeout
  * to prevent defineWinner function run the second time
- * @param {*} event
  */
 function handClickHandler(event) {
   audioPick.play();
@@ -149,7 +171,6 @@ function removeHandEventListeners() {
 /**
  * Major function that randomly generates computer's hand.
  * Executes the logic of defining the winner and display the result messages
- * @param {*} userHand
  */
 function defineWinner(userHand) {
   let indexComp = Math.floor(Math.random() * 5);
@@ -163,7 +184,7 @@ function defineWinner(userHand) {
 
   // This condition defines Winner for the round and handles scores
   if (indexComp === userHand) {
-    document.getElementById("display-result--title").innerText = "Damn! It's a tie!";
+    displayResultTitle.innerText = "Damn! It's a tie!";
   } else if (
     (userHand === 0 && (indexComp === 2 || indexComp === 3)) ||
     (userHand === 1 && (indexComp === 0 || indexComp === 4)) ||
@@ -171,15 +192,13 @@ function defineWinner(userHand) {
     (userHand === 3 && (indexComp === 1 || indexComp === 4)) ||
     (userHand === 4 && (indexComp === 0 || indexComp === 2))
   ) {
-    document.getElementById("display-result--title").innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}  👍`;
+    displayResultTitle.innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}  👍`;
     incrementScorePlayer();
   } else if (userHand === 5) {
-    document.getElementById("display-result--title").innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
+    displayResultTitle.innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
     incrementScoreSheldon();
   } else {
-    document.getElementById(
-      "display-result--title"
-    ).innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
+    displayResultTitle.innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
     incrementScoreSheldon();
   }
 
@@ -187,23 +206,37 @@ function defineWinner(userHand) {
 
 let displayResultDiv = document.getElementById("display-result");
 
-// The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen 
+//The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen  
   if (currentRoundCount <= 3) {
+    /**
+     * Delays 10sec change of screen to the new round if player fails to click to return 
+     */
     timeoutReturn = setTimeout(function () {
       displaySectionClass(".display-playground");
       hideSectionClass(".hide-playground");
     }, 10000);
+    /**
+     * Upon the click event returns player to the new round screen, clears timeout 
+     */
     displayResultDiv.addEventListener("click", function () {
       clearTimeout(timeoutReturn);
       displaySectionClass(".display-playground");
       hideSectionClass(".hide-playground");
     });
   } else {
+    /**
+     * Delays 10sec change of screen to the intro page when the max number of rounds has been reached 
+     * if player fails to click to return 
+     */
     timeoutReturn = setTimeout(function () {
       displaySectionClass(".display-intro");
       hideSectionClass(".hide-intro");
       lastGameResults();
     }, 10000);
+    /**
+     * Upon the click event returns player to the new round screen, when the max number of rounds 
+     * has been reached, clears timeout 
+     */
     displayResultDiv.addEventListener("click", function () {
       clearTimeout(timeoutReturn);
       displaySectionClass(".display-intro");
@@ -217,34 +250,34 @@ let displayResultDiv = document.getElementById("display-result");
  * Increments the Player's score
  */
 function incrementScorePlayer() {
-  let oldScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
-  document.querySelector("#footer--you-score>h3").innerText = ++oldScorePlayer;
+  let oldScorePlayer = parseInt(footerYouScore.innerText);
+  footerYouScore.innerText = ++oldScorePlayer;
 }
 
 /**
  * Increments the Computer's score
  */
 function incrementScoreSheldon() {
-  let oldScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
-  document.querySelector("#footer--sheldon-score>h3").innerText = ++oldScoreSheldon;
+  let oldScoreSheldon = parseInt(footerSheldonScore.innerText);
+  footerSheldonScore.innerText = ++oldScoreSheldon;
 }
 
 /**
  * Increments the number of rounds played
  */
 function incrementRoundCount() {
-  let oldCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
-  document.querySelector("#footer--round-count>h3").innerText = ++oldCount;
+  let oldCount = parseInt(footerRoundCount.innerText);
+  footerRoundCount.innerText = ++oldCount;
 }
 
 /**
  * Clears all scores to start a new round and assigns the initial text to the footer title  
  */
 function clearScores() {
-  document.querySelector("#footer--round-count>h3").innerText = 0;
-  document.querySelector("#footer--sheldon-score>h3").innerText = 0;
-  document.querySelector("#footer--you-score>h3").innerText = 0;
-  document.querySelector("#footer--item-title>h3").innerText = `Maximum Number Of Rounds Per Game = 10`;
+  footerRoundCount.innerText = 0;
+  footerSheldonScore.innerText = 0;
+  footerYouScore.innerText = 0;
+  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = 10`;
 }
 
 /**
@@ -252,17 +285,13 @@ function clearScores() {
  * i.e. the maximum number of rounds has been played  
  */
 function lastGameResults() {
-  let lastScorePlayer = parseInt(document.querySelector("#footer--you-score>h3").innerText);
-  let lastScoreSheldon = parseInt(document.querySelector("#footer--sheldon-score>h3").innerText);
+  let lastScorePlayer = parseInt(footerYouScore.innerText);
+  let lastScoreSheldon = parseInt(footerSheldonScore.innerText);
   if (lastScoreSheldon > lastScorePlayer) {
-    document.querySelector(
-      "#footer--item-title>h3"
-    ).innerText = `Regret to say but You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
+    footerItemTitle.innerText = `Regret to say but You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
   } else if (lastScoreSheldon < lastScorePlayer) {
-    document.querySelector(
-      "#footer--item-title>h3"
-    ).innerText = `What can I say, You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
+    footerItemTitle.innerText = `What can I say, You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
   } else {
-    document.querySelector("#footer--item-title>h3").innerText = `Miraculously, You managed to tie with me! 🤔`;
+    footerItemTitle.innerText = `Miraculously, You managed to tie with me! 🤔`;
   }
 }
