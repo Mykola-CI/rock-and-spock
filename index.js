@@ -5,8 +5,7 @@ let soundEnabled;
  * and provide for full functionality
  * */
 window.onload = (event) => {
-  displaySectionClass(".display-intro");
-  hideSectionClass(".hide-intro");
+  displayIntro();
 
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
@@ -22,15 +21,21 @@ window.onload = (event) => {
     }
     video.pause();
     video.currentTime = 0;
-    displaySectionClass(".display-playground");
-    hideSectionClass(".hide-playground");
+    displayPlayground();
     let lastRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
     if (lastRoundCount > 3) {
       clearScores();
     }
+
+    
+    /**
+     * Listens to the click inside the header area to return the player to the Intro screen
+     */
+    headers.addEventListener("click", displayIntro);
   });
 };
 
+const headers = document.querySelector("header");
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control");
@@ -45,18 +50,13 @@ let countdownInterval;
 
 const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 
-for (let icon of soundToggleButtons) {
-  icon.addEventListener("click", toggleSound)
-}
-
-const headers = document.querySelector("header");
 /**
- * Listens to the click inside the header area to return the player to the Intro screen
+ * Loop that iterates 2 identical icons at top left and right corners of the header.
+ * It adds event listeners to toggle sounds. Both icons operate the same way
  */
-headers.addEventListener("click", function () {
-  displaySectionClass(".display-intro");
-  hideSectionClass(".hide-intro");
-});
+for (let icon of soundToggleButtons) {
+  icon.addEventListener("click", toggleSound);
+}
 
 const footerRoundCount = document.querySelector("#footer--round-count>h3");
 const displayResultTitle = document.getElementById("display-result--title");
@@ -71,6 +71,7 @@ startRoundBtn.addEventListener("click", function () {
   if (soundEnabled) {
     audioClick.play();
   }
+  removeListener(headers, "click", displayIntro);
   displaySectionClass(".display-clock-hands");
   hideSectionClass(".hide-clock-hands");
   incrementRoundCount();
@@ -117,6 +118,9 @@ startRoundBtn.addEventListener("click", function () {
   });
 });
 
+/**
+ * Provides for the toggle effect for one and the same button
+ */
 function toggleSound() {
   soundEnabled = !soundEnabled;
 }
@@ -157,6 +161,16 @@ function displaySectionClass(className) {
   }
 }
 
+function displayIntro() {
+  displaySectionClass(".display-intro");
+  hideSectionClass(".hide-intro");
+}
+
+function displayPlayground() {
+  displaySectionClass(".display-playground");
+  hideSectionClass(".hide-playground");
+}
+
 /**
  * Rearranges the screen to reveal result and clears timeout
  * to prevent defineWinner function run the second time
@@ -173,7 +187,9 @@ function handClickHandler(event) {
   displaySection("display-result");
   const indexUser = hands.indexOf(clickedHandId);
   defineWinner(indexUser);
-  removeEventListeners(handButtons);
+  handButtons.forEach((handButton) => {
+    removeListener(handButtons, "click", handClickHandler);
+  });
 }
 
 /**
@@ -181,10 +197,8 @@ function handClickHandler(event) {
  * the round has been finished and Winner defined. The goal is
  * to prevent from triggering of multiple code running on accidental clicks
  */
-function removeEventListeners(items) {
-  items.forEach((button) => {
-    button.removeEventListener("click", handClickHandler);
-  });
+function removeListener(element, eventType, handler) {
+  element.removeEventListener(eventType, handler);
 }
 
 /**
@@ -221,8 +235,6 @@ function defineWinner(userHand) {
     incrementScoreSheldon();
   }
 
-  
-
   let displayResultDiv = document.getElementById("display-result");
 
   //The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen
@@ -231,16 +243,16 @@ function defineWinner(userHand) {
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
     timeoutReturn = setTimeout(function () {
-      displaySectionClass(".display-playground");
-      hideSectionClass(".hide-playground");
+      displayPlayground();
+      headers.addEventListener("click", displayIntro);
     }, 10000);
     /**
      * Upon the click event returns player to the new round screen, clears timeout
      */
     displayResultDiv.addEventListener("click", function () {
       clearTimeout(timeoutReturn);
-      displaySectionClass(".display-playground");
-      hideSectionClass(".hide-playground");
+      displayPlayground();
+      headers.addEventListener("click", displayIntro);
     });
   } else {
     /**
@@ -248,8 +260,7 @@ function defineWinner(userHand) {
      * if player fails to click to return
      */
     timeoutReturn = setTimeout(function () {
-      displaySectionClass(".display-intro");
-      hideSectionClass(".hide-intro");
+      displayIntro();
       lastGameResults();
     }, 10000);
     /**
@@ -258,8 +269,7 @@ function defineWinner(userHand) {
      */
     displayResultDiv.addEventListener("click", function () {
       clearTimeout(timeoutReturn);
-      displaySectionClass(".display-intro");
-      hideSectionClass(".hide-intro");
+      displayIntro();
       lastGameResults();
     });
   }
