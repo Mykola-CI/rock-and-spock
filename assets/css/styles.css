@@ -16,22 +16,9 @@ body {
   align-items: center;
 }
 
-header,
+.hover-highlight,
 button {
   cursor: pointer;
-}
-
-header {
-  width: min(90vw, 1000px);
-  background: brown;
-  color: white;
-  text-align: center;
-  flex-shrink: 0;
-  padding: 1rem;
-}
-
-header:hover {
-  border: 6px solid red;
 }
 
 h1,
@@ -51,7 +38,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(1rem, 3vw + 0.2rem, 1.5rem);
+  font-size: clamp(1.2rem, 3vw + 0.2rem, 1.7rem);
   line-height: 150%;
 }
 
@@ -62,20 +49,51 @@ h3 {
 p,
 li,
 button {
-  font-size: clamp(1rem, 2vw + 0.2rem, 1.2rem);
+  font-size: clamp(0.9rem, 2vw + 0.2rem, 1.2rem);
 }
 
-header > h3 {
-  padding-top: 1rem;
-  letter-spacing: 3px;
+header {
+  width: min(90vw, 1000px);
+  text-align: center;
+}
+
+#header-grid-container {
+  
+  background: brown;
+  color: white;
+  text-align: center;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+#header-grid-container > :first-child {
+  grid-area: 1 / 1 / 2 / 2;
+  font-size: 150%;
+}
+
+#header-grid-container > h2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+#header-grid-container > :last-child {
+  grid-area: 1 / 3 / 2 / 4;
+  font-size: 150%;
+}
+
+#back-to-intro-notification {
+  padding-top: 10px;
 }
 
 main {
   width: min(90vw, 1000px);
-}
-
-section {
-  border: 4px solid #16133c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .section-flex-column {
@@ -127,18 +145,6 @@ section {
   background: linear-gradient(to top, #63b8ee, #2567a4);
 }
 
-/* .testbutton {
-  font-family: arial;
-  color: #14396A !important;
-  font-size: 14px;
-  text-shadow: 1px 1px 0px #7CACDE;
-  box-shadow: 1px 1px 1px #BEE2F9;
-  padding: 10px 25px;
-  border-radius: 10px;
-  border: 2px solid #3866A3;
-  background: #63B8EE;
-  background: linear-gradient(to top, #63B8EE, #468CCF);
-} */
 #start-playground--button:hover {
   /* color: #14396A !important; */
   background: #468ccf;
@@ -169,7 +175,8 @@ section {
 }
 
 #playground {
-  /* margin-top: clamp(12px, 4vw, 60px); */
+  width: min(90vw, 800px);
+  max-width: 1000px;
   min-height: 200px;
   background-color: #16133c;
   text-align: center;
@@ -216,13 +223,13 @@ section {
 
 .run-game {
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem;
   color: white;
 }
 
 .run-game h2 {
   margin-inline: auto;
-  max-width: 550px;
+  max-width: 650px;
   padding: 0.5rem;
   border: 16px solid rgb(106, 126, 75);
 }

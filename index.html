@@ -9,22 +9,27 @@
       name="description"
       content="Rock and Spock. Online game Rock Scissors Paper Lizard Spock. As made famous by Big Bang Theory series episodes" />
     <meta name="keywords" content="rock, scissors, paper, lizard, spock, online game, simple game, fun game, game of chance" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
-      integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"></script>
+    <!-- Fontawesome kit -->
+    <script src="https://kit.fontawesome.com/e0f7937b3c.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Rock and Spock</title>
   </head>
 
   <body>
     <header>
-      <h1>The Realm Of Rock & Spock</h1>
-      <p class="hide-intro display-playground">☝️ Click here to return to the video and rules 👆</p>
+      <div id="header-grid-container">
+        <button class="sound-toggle"><i class="fa-solid fa-volume-high"></i></button>
+        <h1>The Realm Of Rock & Spock</h1>
+        <button class="sound-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
+      </div>
+      <div id="back-to-intro-notification" class="hide-intro display-playground">
+          <p>☝️ Click here to return to the video and rules 👆</p>
+      </div>
     </header>
 
     <main>
+      
       <section id="intro" class="display-intro hide-playground section-flex-column">
         <h2>rock &nbsp;&nbsp;||&nbsp;&nbsp; paper&nbsp;&nbsp; ||&nbsp;&nbsp; scissors&nbsp;&nbsp; || &nbsp;&nbsp;lizard&nbsp;&nbsp; || &nbsp;&nbsp;spock</h2>
         <div id="intro-video"><video src="assets/video/sheldon-rules-of-the-game.mp4" controls playsinline muted></div>
