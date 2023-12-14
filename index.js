@@ -27,15 +27,14 @@ window.onload = (event) => {
       clearScores();
     }
 
-    
     /**
-     * Listens to the click inside the header area to return the player to the Intro screen
+     * Listens to the button click to return the player to the Intro screen 
      */
-    headers.addEventListener("click", displayIntro);
+    backToIntroButton.addEventListener("click", displayIntro);
   });
 };
 
-const headers = document.querySelector("header");
+const backToIntroButton = document.querySelector("#back-to-intro-btn")
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control");
@@ -49,7 +48,6 @@ let countdownValue;
 let countdownInterval;
 
 const soundToggleButtons = document.getElementsByClassName("sound-toggle");
-
 /**
  * Loop that iterates 2 identical icons at top left and right corners of the header.
  * It adds event listeners to toggle sounds. Both icons operate the same way
@@ -71,7 +69,7 @@ startRoundBtn.addEventListener("click", function () {
   if (soundEnabled) {
     audioClick.play();
   }
-  removeListener(headers, "click", displayIntro);
+
   displaySectionClass(".display-clock-hands");
   hideSectionClass(".hide-clock-hands");
   incrementRoundCount();
@@ -123,6 +121,13 @@ startRoundBtn.addEventListener("click", function () {
  */
 function toggleSound() {
   soundEnabled = !soundEnabled;
+  for (let icon of soundToggleButtons) {
+    if (soundEnabled) {
+      icon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+    } else {
+      icon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+    }
+  }
 }
 
 /**
@@ -179,6 +184,7 @@ function handClickHandler(event) {
   if (soundEnabled) {
     audioPick.play();
   }
+
   const clickedHandId = event.currentTarget.id;
   clearTimeout(timeoutID);
   clearInterval(countdownInterval);
@@ -187,18 +193,14 @@ function handClickHandler(event) {
   displaySection("display-result");
   const indexUser = hands.indexOf(clickedHandId);
   defineWinner(indexUser);
-  handButtons.forEach((handButton) => {
-    removeListener(handButtons, "click", handClickHandler);
-  });
-}
 
-/**
- * Remove event listeners for 5 hand buttons after
- * the round has been finished and Winner defined. The goal is
- * to prevent from triggering of multiple code running on accidental clicks
- */
-function removeListener(element, eventType, handler) {
-  element.removeEventListener(eventType, handler);
+  /**
+   * Removes listeners after hand has been selected by Player to prevent
+   * from multiple defineWinner running 
+   */
+  handButtons.forEach((handButton) => {
+    handButton.removeEventListener("click", handClickHandler);
+  });
 }
 
 /**
@@ -239,22 +241,25 @@ function defineWinner(userHand) {
 
   //The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen
   if (currentRoundCount <= 3) {
+
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
     timeoutReturn = setTimeout(function () {
       displayPlayground();
-      headers.addEventListener("click", displayIntro);
+      // headers.addEventListener("click", displayIntro);
     }, 10000);
+
     /**
      * Upon the click event returns player to the new round screen, clears timeout
      */
     displayResultDiv.addEventListener("click", function () {
       clearTimeout(timeoutReturn);
       displayPlayground();
-      headers.addEventListener("click", displayIntro);
+      // headers.addEventListener("click", displayIntro);
     });
   } else {
+
     /**
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
      * if player fails to click to return
@@ -263,6 +268,7 @@ function defineWinner(userHand) {
       displayIntro();
       lastGameResults();
     }, 10000);
+    
     /**
      * Upon the click event returns player to the new round screen, when the max number of rounds
      * has been reached, clears timeout
