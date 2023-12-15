@@ -1,4 +1,7 @@
+const footerRoundCount = document.querySelector("#footer--round-count>h3");
+let currentRoundCount = parseInt(footerRoundCount.innerText);
 let soundEnabled;
+
 
 /**
  * Setting event listener on the Window load to display intro screen
@@ -22,30 +25,34 @@ window.onload = (event) => {
     video.pause();
     video.currentTime = 0;
     displayPlayground();
-    let lastRoundCount = parseInt(document.querySelector("#footer--round-count>h3").innerText);
-    if (lastRoundCount > 3) {
+    displayResultDiv.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
+    displayResultDiv.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
+    
+    if (currentRoundCount > 3) {
       clearScores();
     }
 
     /**
-     * Listens to the button click to return the player to the Intro screen 
+     * Listens to the button click to return the player to the Intro screen
      */
     backToIntroButton.addEventListener("click", displayIntro);
   });
 };
 
-const backToIntroButton = document.querySelector("#back-to-intro-btn")
+const backToIntroButton = document.querySelector("#back-to-intro-btn");
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 const countdownDisplays = document.querySelectorAll(".countdown-numbers");
-let currentRoundCount;
+
 let timeoutID;
 let timeoutReturn;
 let countdownValue;
 let countdownInterval;
+let indexComp;
+let indexUser;
 
 const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 /**
@@ -56,7 +63,7 @@ for (let icon of soundToggleButtons) {
   icon.addEventListener("click", toggleSound);
 }
 
-const footerRoundCount = document.querySelector("#footer--round-count>h3");
+const displayResultDiv = document.getElementById("display-result");
 const displayResultTitle = document.getElementById("display-result--title");
 const footerYouScore = document.querySelector("#footer--you-score>h3");
 const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
@@ -74,8 +81,6 @@ startRoundBtn.addEventListener("click", function () {
   hideSectionClass(".hide-clock-hands");
   incrementRoundCount();
 
-  currentRoundCount = parseInt(footerRoundCount.innerText);
-
   // This loop reinstates availability and visibility of 'inactive' hands hidden at the previous round
   // - refer to the respective loop in defineWinner function
   for (let index = 0; index < hands.length; index++) {
@@ -91,7 +96,7 @@ startRoundBtn.addEventListener("click", function () {
     countdownValue--;
     if (countdownValue < 0) {
       clearInterval(countdownInterval);
-      countdownDisplays.forEach((display) => (display.innerText = ""));
+      // countdownDisplays.forEach((display) => (display.innerText = ""));
     } else {
       countdownDisplays.forEach((display) => (display.innerText = countdownValue));
     }
@@ -188,15 +193,24 @@ function handClickHandler(event) {
   const clickedHandId = event.currentTarget.id;
   clearTimeout(timeoutID);
   clearInterval(countdownInterval);
-  countdownDisplays.forEach((display) => (display.innerText = ""));
+  // countdownDisplays.forEach((display) => (display.innerText = ""));
   hideSection("clock-countdown");
   displaySection("display-result");
-  const indexUser = hands.indexOf(clickedHandId);
-  defineWinner(indexUser);
+  indexUser = hands.indexOf(clickedHandId);
+  indexComp = Math.floor(Math.random() * 5);
+
+  // This loop hides inactive hands left after Player and Computer have picked theirs
+  for (let index = 0; index < hands.length; index++) {
+    if (index !== indexUser && index !== indexComp) {
+      hideSection(hands[index]);
+    }
+  }
+
+  defineWinner(indexUser, indexComp);
 
   /**
    * Removes listeners after hand has been selected by Player to prevent
-   * from multiple defineWinner running 
+   * from multiple defineWinner running
    */
   handButtons.forEach((handButton) => {
     handButton.removeEventListener("click", handClickHandler);
@@ -207,59 +221,44 @@ function handClickHandler(event) {
  * Major function that randomly generates computer's hand.
  * Executes the logic of defining the winner and display the result messages
  */
-function defineWinner(userHand) {
-  let indexComp = Math.floor(Math.random() * 5);
-
-  // This loop hides inactive hands left after Player and Computer have picked theirs
-  for (let index = 0; index < hands.length; index++) {
-    if (index !== userHand && index !== indexComp) {
-      hideSection(hands[index]);
-    }
-  }
+function defineWinner(userHand, compHand) {
 
   // This condition defines Winner for the round and handles scores
-  if (indexComp === userHand) {
+  if (compHand === userHand) {
     displayResultTitle.innerText = "Damn! It's a tie!";
   } else if (
-    (userHand === 0 && (indexComp === 2 || indexComp === 3)) ||
-    (userHand === 1 && (indexComp === 0 || indexComp === 4)) ||
-    (userHand === 2 && (indexComp === 1 || indexComp === 3)) ||
-    (userHand === 3 && (indexComp === 1 || indexComp === 4)) ||
-    (userHand === 4 && (indexComp === 0 || indexComp === 2))
+    (userHand === 0 && (compHand === 2 || compHand === 3)) ||
+    (userHand === 1 && (compHand === 0 || compHand === 4)) ||
+    (userHand === 2 && (compHand === 1 || compHand === 3)) ||
+    (userHand === 3 && (compHand === 1 || compHand === 4)) ||
+    (userHand === 4 && (compHand === 0 || compHand === 2))
   ) {
-    displayResultTitle.innerText = `You win! ${hands[userHand]} beats ${hands[indexComp]}  👍`;
+    displayResultTitle.innerText = `You win! ${hands[userHand]} beats ${hands[compHand]}  👍`;
     incrementScorePlayer();
   } else if (userHand === 5) {
     displayResultTitle.innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
     incrementScoreSheldon();
   } else {
-    displayResultTitle.innerText = `Ups! Bad Luck! ${hands[indexComp]} beats ${hands[userHand]}  👎`;
+    displayResultTitle.innerText = `Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}  👎`;
     incrementScoreSheldon();
   }
 
-  let displayResultDiv = document.getElementById("display-result");
-
   //The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen
   if (currentRoundCount <= 3) {
-
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
     timeoutReturn = setTimeout(function () {
       displayPlayground();
-      // headers.addEventListener("click", displayIntro);
-    }, 10000);
+    }, 5000);
 
     /**
-     * Upon the click event returns player to the new round screen, clears timeout
+     * Upon the click the event returns player to the new round screen, clears timeout
+     * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
-    displayResultDiv.addEventListener("click", function () {
-      clearTimeout(timeoutReturn);
-      displayPlayground();
-      // headers.addEventListener("click", displayIntro);
-    });
-  } else {
+    displayResultDiv.addEventListener("click", clearTimeNewRound);
 
+  } else {
     /**
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
      * if player fails to click to return
@@ -267,18 +266,32 @@ function defineWinner(userHand) {
     timeoutReturn = setTimeout(function () {
       displayIntro();
       lastGameResults();
-    }, 10000);
-    
+    }, 5000);
+
     /**
-     * Upon the click event returns player to the new round screen, when the max number of rounds
-     * has been reached, clears timeout
+     * Upon the click the event returns player to the new round screen, when the max number of rounds
+     * has been reached, clears timeout.
+     * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
-    displayResultDiv.addEventListener("click", function () {
-      clearTimeout(timeoutReturn);
-      displayIntro();
-      lastGameResults();
-    });
+    displayResultDiv.addEventListener("click", clearTimeIntroResults);
   }
+}
+
+/**
+ * this function is registered mainly in order to be able to remove the listener
+ */
+function clearTimeNewRound() {
+  clearTimeout(timeoutReturn);
+  displayPlayground();
+} 
+
+/**
+ * this function is registered mainly in order to be able to remove the listener
+ */
+function clearTimeIntroResults() {
+  clearTimeout(timeoutReturn);
+  displayIntro();
+  lastGameResults();
 }
 
 /**
@@ -301,8 +314,8 @@ function incrementScoreSheldon() {
  * Increments the number of rounds played
  */
 function incrementRoundCount() {
-  let oldCount = parseInt(footerRoundCount.innerText);
-  footerRoundCount.innerText = ++oldCount;
+  // let oldCount = parseInt(footerRoundCount.innerText);
+  footerRoundCount.innerText = ++currentRoundCount;
 }
 
 /**
@@ -312,6 +325,7 @@ function clearScores() {
   footerRoundCount.innerText = 0;
   footerSheldonScore.innerText = 0;
   footerYouScore.innerText = 0;
+  currentRoundCount = 0;
   footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = 10`;
 }
 
