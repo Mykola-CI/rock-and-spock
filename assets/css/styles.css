@@ -277,6 +277,7 @@ main {
 }
 
 .hand-type {
+  color: black;
   margin-top: 2rem;
   margin-bottom: 2rem;
   height: 200px;

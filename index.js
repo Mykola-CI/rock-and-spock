@@ -2,7 +2,6 @@ const footerRoundCount = document.querySelector("#footer--round-count>h3");
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let soundEnabled;
 
-
 /**
  * Setting event listener on the Window load to display intro screen
  * and provide for full functionality
@@ -27,7 +26,7 @@ window.onload = (event) => {
     displayPlayground();
     displayResultDiv.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
     displayResultDiv.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
-    
+
     if (currentRoundCount > 3) {
       clearScores();
     }
@@ -51,8 +50,8 @@ let timeoutID;
 let timeoutReturn;
 let countdownValue;
 let countdownInterval;
-let indexComp;
 let indexUser;
+let indexComp;
 
 const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 /**
@@ -96,12 +95,12 @@ startRoundBtn.addEventListener("click", function () {
     countdownValue--;
     if (countdownValue < 0) {
       clearInterval(countdownInterval);
-      // countdownDisplays.forEach((display) => (display.innerText = ""));
     } else {
       countdownDisplays.forEach((display) => (display.innerText = countdownValue));
     }
   }, 1000);
 
+  indexComp = Math.floor(Math.random() * 5); // Generates random integer from 0 to 4, treated as Computer's hand
   /**
    * Sets the delay time 5sec for the function defineWinner to implement
    * in case the Player fails to select the hand within 5 sec
@@ -110,16 +109,63 @@ startRoundBtn.addEventListener("click", function () {
     hideSection("clock-countdown");
     hideSection("hand-selection");
     displaySection("display-result");
-    defineWinner(5);
+    defineWinner(5, indexComp);
   }, 5000);
 
   /**
    * On click event launches the handClickHandler function, which deals with the selected hand
    */
   handButtons.forEach((handButton) => {
+    const buttonLabel = handButton.previousElementSibling;
+    buttonLabel.innerHTML = "";
     handButton.addEventListener("click", handClickHandler);
   });
 });
+
+/**
+ * Rearrange the screen to reveal result, launch defineWinner,
+ * clear timeout to prevent defineWinner function run the second time
+ */
+function handClickHandler(event) {
+  if (soundEnabled) {
+    audioPick.play();
+  }
+
+  const clickedHandId = event.currentTarget.id;
+  indexUser = hands.indexOf(clickedHandId);
+
+  clearTimeout(timeoutID);
+  clearInterval(countdownInterval);
+  hideSection("clock-countdown");
+  displaySection("display-result");
+
+  let userChoiceText = handButtons[indexUser].previousElementSibling;
+  let compChoiceText = handButtons[indexComp].previousElementSibling;
+
+  if (indexUser === indexComp) {
+    userChoiceText.innerHTML = "Tie!";
+  } else {
+    userChoiceText.innerHTML = "Your choice";
+    compChoiceText.innerHTML = "Sheldon's choice";
+  }
+
+  // This loop hides inactive hands left after Player and Computer have picked theirs
+  for (let index = 0; index < hands.length; index++) {
+    if (index !== indexUser && index !== indexComp) {
+      hideSection(hands[index]);
+    }
+  }
+
+  /**
+   * Removes listeners after hand has been selected by Player to prevent
+   * from multiple defineWinner running
+   */
+  handButtons.forEach((handButton) => {
+    handButton.removeEventListener("click", handClickHandler);
+  });
+
+  defineWinner(indexUser, indexComp);
+}
 
 /**
  * Provides for the toggle effect for one and the same button
@@ -182,47 +228,10 @@ function displayPlayground() {
 }
 
 /**
- * Rearranges the screen to reveal result and clears timeout
- * to prevent defineWinner function run the second time
- */
-function handClickHandler(event) {
-  if (soundEnabled) {
-    audioPick.play();
-  }
-
-  const clickedHandId = event.currentTarget.id;
-  clearTimeout(timeoutID);
-  clearInterval(countdownInterval);
-  // countdownDisplays.forEach((display) => (display.innerText = ""));
-  hideSection("clock-countdown");
-  displaySection("display-result");
-  indexUser = hands.indexOf(clickedHandId);
-  indexComp = Math.floor(Math.random() * 5);
-
-  // This loop hides inactive hands left after Player and Computer have picked theirs
-  for (let index = 0; index < hands.length; index++) {
-    if (index !== indexUser && index !== indexComp) {
-      hideSection(hands[index]);
-    }
-  }
-
-  defineWinner(indexUser, indexComp);
-
-  /**
-   * Removes listeners after hand has been selected by Player to prevent
-   * from multiple defineWinner running
-   */
-  handButtons.forEach((handButton) => {
-    handButton.removeEventListener("click", handClickHandler);
-  });
-}
-
-/**
  * Major function that randomly generates computer's hand.
  * Executes the logic of defining the winner and display the result messages
  */
 function defineWinner(userHand, compHand) {
-
   // This condition defines Winner for the round and handles scores
   if (compHand === userHand) {
     displayResultTitle.innerText = "Damn! It's a tie!";
@@ -257,7 +266,6 @@ function defineWinner(userHand, compHand) {
      * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
     displayResultDiv.addEventListener("click", clearTimeNewRound);
-
   } else {
     /**
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
@@ -283,7 +291,7 @@ function defineWinner(userHand, compHand) {
 function clearTimeNewRound() {
   clearTimeout(timeoutReturn);
   displayPlayground();
-} 
+}
 
 /**
  * this function is registered mainly in order to be able to remove the listener
