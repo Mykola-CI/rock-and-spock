@@ -105,12 +105,12 @@ startRoundBtn.addEventListener("click", function () {
    * Sets the delay time 5sec for the function defineWinner to implement
    * in case the Player fails to select the hand within 5 sec
    */
-  timeoutID = setTimeout(function () {
-    hideSection("clock-countdown");
-    hideSection("hand-selection");
-    displaySection("display-result");
-    defineWinner(5, indexComp);
-  }, 5000);
+  // timeoutID = setTimeout(function () {
+  //   hideSection("clock-countdown");
+  //   hideSection("hand-selection");
+  //   displaySection("display-result");
+  //   defineWinner(5, indexComp);
+  // }, 5000);
 
   /**
    * On click event launches the handClickHandler function, which deals with the selected hand
@@ -257,9 +257,9 @@ function defineWinner(userHand, compHand) {
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
-    timeoutReturn = setTimeout(function () {
-      displayPlayground();
-    }, 5000);
+    // timeoutReturn = setTimeout(function () {
+    //   displayPlayground();
+    // }, 5000);
 
     /**
      * Upon the click the event returns player to the new round screen, clears timeout
@@ -271,10 +271,10 @@ function defineWinner(userHand, compHand) {
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
      * if player fails to click to return
      */
-    timeoutReturn = setTimeout(function () {
-      displayIntro();
-      lastGameResults();
-    }, 5000);
+    // timeoutReturn = setTimeout(function () {
+    //   displayIntro();
+    //   lastGameResults();
+    // }, 5000);
 
     /**
      * Upon the click the event returns player to the new round screen, when the max number of rounds

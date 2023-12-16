@@ -9,7 +9,8 @@
 }
 
 body {
-  min-height: 100dvh;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -100,15 +101,15 @@ header {
 }
 
 #back-to-intro-btn {
-width: min(90%, 350px);
-  height: 6dvh;
+width: min(90%, 300px);
+  height: 6vh;
   color: white;
   text-shadow: 1px 1px 0px #16133c;
   box-shadow: 1px 1px 1px #BEE2F9;
-  padding: 10px 25px;
-  border-radius: 20% 20% / 100% 100%; 
+  padding: 6px 12px;
+  border-radius: 3vh; 
   border: 4px dotted #3866A3;
-  background: #4F8073;
+  /* background: #4F8073; */
   background: linear-gradient(to top, #4F8073, #C7FCEC);
 }
 
@@ -118,10 +119,11 @@ width: min(90%, 350px);
 }
 
 main {
+  min-height: 70vh;
   width: min(90vw, 1000px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -157,13 +159,13 @@ main {
 
 #start-playground {
   width: 100%;
-  min-height: 10dvh;
+  min-height: 10vh;
   background-color: #C7FCEC;
 }
 
 #start-playground--button {
   width: min(90%, 200px);
-  height: 8dvh;
+  height: 8vh;
   color: white;
   text-shadow: 1px 1px 0px #16133c;
   box-shadow: 1px 1px 1px #BEE2F9;
@@ -263,8 +265,9 @@ main {
 }
 
 #clock-countdown {
-  margin-top: 100px;
-  padding: 2rem 1rem;
+  /* margin-top: 100px; */
+  /* padding: 2rem 1rem; */
+  /* min-width: 30%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -273,11 +276,11 @@ main {
 
 .countdown-numbers {
   padding: 1rem;
-  font-size: 400%;
+  font-size: clamp(2.5rem, 7vw, 4rem);
 }
 
 #clock-countdown img {
-  width: 200px;
+  width: 100%;
   /* margin-left: 50%;
   transform: translateX(-50%); */
 }
@@ -296,11 +299,12 @@ main {
 }
 
 #hand-selection {
-  min-height: 100px;
-  background-color: azure;
+  /* min-height: 100px; */
+  /* background-color: azure; */
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -308,14 +312,20 @@ main {
   color: black;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  height: 200px;
-  width: 140px;
-  border: 2px solid darkorange;
+  /* height: 200px; */
+  width: max(80px, 15%);
+  /* border: 2px solid darkorange; */
   text-align: center;
+}
+
+.hand-type--button {
+  border: none;
 }
 
 .hand-type img {
   max-width: 100%;
+  background-color: white;
+  border: none;
 }
 
 footer {
@@ -386,7 +396,7 @@ footer > div {
 
 @keyframes glowing {
   0% {
-    border-color: rgb(106, 126, 75);
+    border-color: #4F8073;
   }
   40% {
     border-color: azure;
@@ -395,7 +405,7 @@ footer > div {
     border-color: azure;
   }
   100% {
-    border-color: rgb(106, 126, 75);
+    border-color: #4F8073;
   }
 }
 
