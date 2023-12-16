@@ -24,13 +24,12 @@ window.onload = (event) => {
     video.pause();
     video.currentTime = 0;
     displayPlayground();
-    displayResultDiv.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
-    displayResultDiv.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
+    backToNewRound.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
+    backToNewRound.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
 
-    if (currentRoundCount > 3) {
+    if (currentRoundCount > 4) {
       clearScores();
     }
-
     /**
      * Listens to the button click to return the player to the Intro screen
      */
@@ -62,8 +61,9 @@ for (let icon of soundToggleButtons) {
   icon.addEventListener("click", toggleSound);
 }
 
-const displayResultDiv = document.getElementById("display-result");
+// const displayResultDiv = document.getElementById("display-result");
 const displayResultTitle = document.getElementById("display-result--title");
+const backToNewRound = document.getElementById("back-to-new-round-btn");
 const footerYouScore = document.querySelector("#footer--you-score>h3");
 const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
 const footerItemTitle = document.querySelector("#footer--item-title>h3");
@@ -105,12 +105,13 @@ startRoundBtn.addEventListener("click", function () {
    * Sets the delay time 5sec for the function defineWinner to implement
    * in case the Player fails to select the hand within 5 sec
    */
-  // timeoutID = setTimeout(function () {
-  //   hideSection("clock-countdown");
-  //   hideSection("hand-selection");
-  //   displaySection("display-result");
-  //   defineWinner(5, indexComp);
-  // }, 5000);
+  timeoutID = setTimeout(function () {
+    hideSection("clock-countdown");
+    hideSection("hand-selection");
+    displaySection("display-result");
+    defineWinner(5, indexComp);
+    displaySection("back-to-new-round");
+  }, 5000);
 
   /**
    * On click event launches the handClickHandler function, which deals with the selected hand
@@ -118,6 +119,7 @@ startRoundBtn.addEventListener("click", function () {
   handButtons.forEach((handButton) => {
     const buttonLabel = handButton.previousElementSibling;
     buttonLabel.innerHTML = "";
+    buttonLabel.style.color = "";
     handButton.addEventListener("click", handClickHandler);
   });
 });
@@ -138,6 +140,7 @@ function handClickHandler(event) {
   clearInterval(countdownInterval);
   hideSection("clock-countdown");
   displaySection("display-result");
+  displaySection("back-to-new-round");
 
   let userChoiceText = handButtons[indexUser].previousElementSibling;
   let compChoiceText = handButtons[indexComp].previousElementSibling;
@@ -146,6 +149,7 @@ function handClickHandler(event) {
     userChoiceText.innerHTML = "Tie!";
   } else {
     userChoiceText.innerHTML = "Your choice";
+    userChoiceText.style.color = "red"; 
     compChoiceText.innerHTML = "Sheldon's choice";
   }
 
@@ -245,7 +249,7 @@ function defineWinner(userHand, compHand) {
     displayResultTitle.innerText = `You win! ${hands[userHand]} beats ${hands[compHand]}  👍`;
     incrementScorePlayer();
   } else if (userHand === 5) {
-    displayResultTitle.innerText = `Oi! You haven't picked a hand! Pity, but you loose anyway!  👎`;
+    displayResultTitle.innerText = `Oi! No hand picked! Pity, you loose anyway!  👎`;
     incrementScoreSheldon();
   } else {
     displayResultTitle.innerText = `Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}  👎`;
@@ -253,35 +257,35 @@ function defineWinner(userHand, compHand) {
   }
 
   //The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen
-  if (currentRoundCount <= 3) {
+  if (currentRoundCount <= 4) {
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
-    // timeoutReturn = setTimeout(function () {
-    //   displayPlayground();
-    // }, 5000);
+    timeoutReturn = setTimeout(function () {
+      displayPlayground();
+    }, 10000);
 
     /**
      * Upon the click the event returns player to the new round screen, clears timeout
      * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
-    displayResultDiv.addEventListener("click", clearTimeNewRound);
+    backToNewRound.addEventListener("click", clearTimeNewRound);
   } else {
     /**
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
      * if player fails to click to return
      */
-    // timeoutReturn = setTimeout(function () {
-    //   displayIntro();
-    //   lastGameResults();
-    // }, 5000);
+    timeoutReturn = setTimeout(function () {
+      displayIntro();
+      lastGameResults();
+    }, 5000);
 
     /**
      * Upon the click the event returns player to the new round screen, when the max number of rounds
      * has been reached, clears timeout.
      * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
-    displayResultDiv.addEventListener("click", clearTimeIntroResults);
+    backToNewRound.addEventListener("click", clearTimeIntroResults);
   }
 }
 
@@ -334,7 +338,7 @@ function clearScores() {
   footerSheldonScore.innerText = 0;
   footerYouScore.innerText = 0;
   currentRoundCount = 0;
-  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = 10`;
+  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = 5`;
 }
 
 /**
