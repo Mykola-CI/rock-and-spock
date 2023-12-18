@@ -1,8 +1,30 @@
-const maxNumRounds = 5;
+const maxNumRounds = 5; // put for convenience of developer to change maximum number of rounds 
+const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors for 5 available gaming hands
+const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 const footerRoundCount = document.querySelector("#footer--round-count>h3");
+const playgroundTitle = document.getElementById("playground--title");
+const footerScoreTitle = document.querySelector("#footer--item-you>h3");
+const backToIntroButton = document.querySelector("#back-to-intro-btn");
+const handButtons = document.querySelectorAll(".hand-type--button");
+const startRoundBtn = document.getElementById("start-control");
+const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
+const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
+const countdownDisplays = document.querySelectorAll(".countdown-numbers");
+const displayResultTitle = document.getElementById("display-result--title");
+const backToNewRound = document.getElementById("back-to-new-round-btn");
+const footerYouScore = document.querySelector("#footer--you-score>h3");
+const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
+const footerItemTitle = document.querySelector("#footer--item-title>h3");
+
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let soundEnabled;
 let playerName;
+let timeoutID;
+let timeoutReturn;
+let countdownValue;
+let countdownInterval;
+let indexUser;
+let indexComp;
 
 /**
  * Setting event listener on the Window load to display intro screen
@@ -13,7 +35,7 @@ window.onload = (event) => {
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
   soundEnabled = false;
-
+footerItemTitle.innerHTML = `Maximum Number of Rounds Per Game = ${maxNumRounds} `
   /**
    * Setting event listener for the only button on the intro screen that gets you
    * to the Playground screen
@@ -44,6 +66,7 @@ document.getElementById("input-name--form").addEventListener("submit", function 
   if (validateInput(playerName)) {
     // store player's name for further use
     sessionStorage.setItem("playerName", playerName);
+    footerScoreTitle.innerHTML = `${playerName}`;
     displayPlayground();
   } else {
     // if player's name is not valid, do nothing or show an error message
@@ -73,22 +96,6 @@ function prepareNewRound() {
   }
 }
 
-const backToIntroButton = document.querySelector("#back-to-intro-btn");
-const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
-const handButtons = document.querySelectorAll(".hand-type--button");
-const startRoundBtn = document.getElementById("start-control");
-const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
-const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
-const countdownDisplays = document.querySelectorAll(".countdown-numbers");
-
-let timeoutID;
-let timeoutReturn;
-let countdownValue;
-let countdownInterval;
-let indexUser;
-let indexComp;
-
-const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 /**
  * Loop that iterates 2 identical icons at top left and right corners of the header.
  * It adds event listeners to toggle sounds. Both icons operate the same way
@@ -96,13 +103,6 @@ const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 for (let icon of soundToggleButtons) {
   icon.addEventListener("click", toggleSound);
 }
-
-// const displayResultDiv = document.getElementById("display-result");
-const displayResultTitle = document.getElementById("display-result--title");
-const backToNewRound = document.getElementById("back-to-new-round-btn");
-const footerYouScore = document.querySelector("#footer--you-score>h3");
-const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
-const footerItemTitle = document.querySelector("#footer--item-title>h3");
 
 /**
  * the click event on the button starts a round, sets timeout and displays hands to pick
@@ -184,9 +184,9 @@ function handClickHandler(event) {
   if (indexUser === indexComp) {
     userChoiceText.innerHTML = "Tie!";
   } else {
-    userChoiceText.innerHTML = "Your choice";
+    userChoiceText.innerHTML = `${playerName}`;
     userChoiceText.style.color = "red";
-    compChoiceText.innerHTML = "Sheldon's choice";
+    compChoiceText.innerHTML = "Sheldon";
   }
 
   // This loop hides inactive hands left after Player and Computer have picked theirs
@@ -265,6 +265,7 @@ function displayIntro() {
 function displayPlayground() {
   displaySectionClass(".display-playground");
   hideSectionClass(".hide-playground");
+  playgroundTitle.innerHTML = `Well, ${playerName}! You'll have 5 sec to pick a hand!`
 }
 
 function displayInputName() {
@@ -293,18 +294,18 @@ function defineWinner(userHand, compHand) {
     (userHand === 3 && (compHand === 1 || compHand === 4)) ||
     (userHand === 4 && (compHand === 0 || compHand === 2))
   ) {
-    displayResultTitle.innerText = `You win! ${hands[userHand]} beats ${hands[compHand]}  👍`;
+    displayResultTitle.innerText = `You win, ${playerName}! ${hands[userHand]} beats ${hands[compHand]}  👍`;
     incrementScorePlayer();
   } else if (userHand === 5) {
     displayResultTitle.innerText = `Oi! No hand picked! Pity, you loose anyway!  👎`;
     incrementScoreSheldon();
   } else {
-    displayResultTitle.innerText = `Ups! Bad Luck! ${hands[compHand]} beats ${hands[userHand]}  👎`;
+    displayResultTitle.innerText = `Ups! Bad Luck, ${playerName} ! ${hands[compHand]} beats ${hands[userHand]}  👎`;
     incrementScoreSheldon();
   }
 
   //The condition that checks the maximum number of rounds and returns Player to a new round or to the intro screen
-  if (currentRoundCount <= 4) {
+  if (currentRoundCount <= maxNumRounds - 1) {
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
@@ -385,7 +386,7 @@ function clearScores() {
   footerSheldonScore.innerText = 0;
   footerYouScore.innerText = 0;
   currentRoundCount = 0;
-  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = 5`;
+  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = ${maxNumRounds}`;
 }
 
 /**
