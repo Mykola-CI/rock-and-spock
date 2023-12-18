@@ -8,8 +8,13 @@
   box-sizing: border-box;
 }
 
+html {
+  height: -webkit-fill-available;
+}
+
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
   min-width: 100vw;
   display: flex;
   flex-direction: column;
@@ -46,14 +51,14 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);
+  font-size: clamp(0.8rem, 1.8vw + 0.2rem, 1.2rem);
 }
 
 p,
 li,
 button,
 input {
-  font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);
+  font-size: clamp(0.8rem, 1.8vw + 0.1rem, 1.2rem);
 }
 
 header {
@@ -62,8 +67,7 @@ header {
 }
 
 #header-grid-container {
-  
-  background: #4F8073;
+  background: #4f8073;
   color: white;
   text-align: center;
   padding: clamp(0.5rem, 2vw, 1rem);
@@ -76,7 +80,6 @@ header {
 
 #header-grid-container > :first-child {
   grid-area: 1 / 1 / 2 / 2;
-  
 }
 
 #header-grid-container > h1 {
@@ -93,31 +96,31 @@ header {
 
 .sound-toggle {
   width: max(45px, 60%);
-  background-color: #4F8073;
+  background-color: #4f8073;
   font-size: 150%;
 }
 
 .sound-toggle > i {
   color: white;
-  background-color: #4F8073;
+  background-color: #4f8073;
 }
 
 #back-to-intro-btn {
-width: min(90%, 300px);
+  width: min(90%, 300px);
   height: 6vh;
   color: white;
   text-shadow: 1px 1px 0px #16133c;
-  box-shadow: 1px 1px 1px #BEE2F9;
+  box-shadow: 1px 1px 1px #bee2f9;
   padding: 6px 12px;
-  border-radius: 3vh; 
-  border: 4px dotted #3866A3;
+  border-radius: 3vh;
+  border: 4px dotted #3866a3;
   /* background: #4F8073; */
-  background: linear-gradient(to top, #4F8073, #C7FCEC);
+  background: linear-gradient(to top, #4f8073, #c7fcec);
 }
 
 #back-to-intro-btn:hover {
-  background: #C7FCEC;
-  background: linear-gradient(to top, #C7FCEC, #4F8073);
+  background: #c7fcec;
+  background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
 main {
@@ -150,7 +153,7 @@ main {
 
 #intro-video {
   min-height: fit-content;
-  background-color: #C7FCEC;
+  background-color: #c7fcec;
   text-align: center;
 }
 
@@ -162,7 +165,7 @@ main {
 #start-playground {
   width: 100%;
   min-height: 10vh;
-  background-color: #C7FCEC;
+  background-color: #c7fcec;
 }
 
 #start-playground--button {
@@ -170,17 +173,17 @@ main {
   height: 8vh;
   color: white;
   text-shadow: 1px 1px 0px #16133c;
-  box-shadow: 1px 1px 1px #BEE2F9;
+  box-shadow: 1px 1px 1px #bee2f9;
   padding: 10px 25px;
-  border-radius: 4vh; 
-  border: 4px dotted #3866A3;
+  border-radius: 4vh;
+  border: 4px dotted #3866a3;
   /* background: #4F8073; */
-  background: linear-gradient(to top, #4F8073, #C7FCEC);
+  background: linear-gradient(to top, #4f8073, #c7fcec);
 }
 
 #start-playground--button:hover {
-  background: #C7FCEC;
-  background: linear-gradient(to top, #C7FCEC, #4F8073);
+  background: #c7fcec;
+  background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
 #intro > :nth-child(4) {
@@ -194,7 +197,7 @@ main {
 #game-rules {
   width: 100%;
   min-height: fit-content;
-  background-color: #C7FCEC;
+  background-color: #c7fcec;
   color: black;
   display: flex;
   justify-content: space-around;
@@ -228,11 +231,11 @@ main {
 #input-name--btn {
   width: 60px;
   height: 60px;
-  background: linear-gradient(to top, #4F8073, #C7FCEC);
-  border: 4px dotted #3866A3;
+  background: linear-gradient(to top, #4f8073, #c7fcec);
+  border: 4px dotted #3866a3;
   border-radius: 50%;
   color: white; /* Text color */
-  padding: 6px; 
+  padding: 6px;
   /* text-align: center; */
   text-decoration: none;
   display: inline-block;
@@ -241,8 +244,8 @@ main {
 }
 
 #input-name--btn:hover {
-    background: #C7FCEC;
-    background: linear-gradient(to top, #C7FCEC, #4F8073);
+  background: #c7fcec;
+  background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
 #playground {
@@ -276,7 +279,7 @@ main {
 
 #start-control img {
   width: 100%;
-  border: 16px solid #4F8073;
+  border: 16px solid #4f8073;
 }
 
 #start-control:hover img {
@@ -302,10 +305,11 @@ main {
   margin-inline: auto;
   max-width: 650px;
   padding: 0.5rem;
-  border: 16px solid #4F8073;
+  border: 16px solid #4f8073;
 }
 
 #clock-countdown {
+  flex-basis: 60%;
   /* margin-top: 100px; */
   /* padding: 2rem 1rem; */
   /* min-width: 30%; */
@@ -317,7 +321,7 @@ main {
 
 .countdown-numbers {
   padding: 1rem;
-  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-size: clamp(2.8rem, 7vw + 0.5rem, 4rem);
 }
 
 #clock-countdown img {
@@ -332,7 +336,7 @@ main {
   background-color: #16133c;
   color: white;
   align-items: center;
-  border: 16px solid #4F8073;
+  border: 16px solid #4f8073;
   text-align: center;
 }
 
@@ -347,17 +351,16 @@ main {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
 }
 
 .hand-type {
   color: black;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  /* height: 200px; */
-  width: max(80px, 15%);
-  /* border: 2px solid darkorange; */
+  /* margin-top: 2rem;
+  margin-bottom: 1rem; */
+  width: max(100px, 17%);
+  padding: 0.2rem;
   text-align: center;
 }
 
@@ -380,17 +383,17 @@ main {
   height: 8vh;
   color: white;
   text-shadow: 1px 1px 0px #16133c;
-  box-shadow: 1px 1px 1px #BEE2F9;
+  box-shadow: 1px 1px 1px #bee2f9;
   padding: 10px 25px;
-  border-radius: 4vh; 
-  border: 4px dotted #3866A3;
+  border-radius: 4vh;
+  border: 4px dotted #3866a3;
   /* background: #4F8073; */
-  background: linear-gradient(to top, #4F8073, #C7FCEC);
+  background: linear-gradient(to top, #4f8073, #c7fcec);
 }
 
-#back-to-new-round-btn:hover { 
-background: #C7FCEC;
-  background: linear-gradient(to top, #C7FCEC, #4F8073);
+#back-to-new-round-btn:hover {
+  background: #c7fcec;
+  background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
 footer {
@@ -416,7 +419,7 @@ footer > div {
 }
 
 .footer--grid-item {
-  padding: min(2vw, 1rem) min(3vw, 2rem);
+  padding: min(2vw, 0.5rem) min(3vw, 1.5rem);
 }
 
 #footer--item-you {
@@ -461,7 +464,7 @@ footer > div {
 
 @keyframes glowing {
   0% {
-    border-color: #4F8073;
+    border-color: #4f8073;
   }
   40% {
     border-color: azure;
@@ -470,7 +473,7 @@ footer > div {
     border-color: azure;
   }
   100% {
-    border-color: #4F8073;
+    border-color: #4f8073;
   }
 }
 
@@ -492,5 +495,21 @@ footer > div {
 @media (hover: none) {
   #start-control img {
     animation: glowing 3s infinite;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  #hand-selection {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hand-type {
+    padding: 0.5rem;
+    width: max(80px, 28%);
+  }
+
+  #clock-countdown > :nth-child(2) {
+    flex-basis: 200px;
   }
 }
