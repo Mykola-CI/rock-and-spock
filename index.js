@@ -1,6 +1,8 @@
+const maxNumRounds = 5;
 const footerRoundCount = document.querySelector("#footer--round-count>h3");
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let soundEnabled;
+let playerName;
 
 /**
  * Setting event listener on the Window load to display intro screen
@@ -8,7 +10,6 @@ let soundEnabled;
  * */
 window.onload = (event) => {
   displayIntro();
-
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
   soundEnabled = false;
@@ -23,12 +24,12 @@ window.onload = (event) => {
     }
     video.pause();
     video.currentTime = 0;
-    displayPlayground();
-    backToNewRound.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
-    backToNewRound.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
 
-    if (currentRoundCount > 4) {
-      clearScores();
+    if (playerName) {
+      prepareNewRound();
+      displayPlayground();
+    } else {
+      displayInputName();
     }
     /**
      * Listens to the button click to return the player to the Intro screen
@@ -36,6 +37,41 @@ window.onload = (event) => {
     backToIntroButton.addEventListener("click", displayIntro);
   });
 };
+
+document.getElementById("input-name--form").addEventListener("submit", function (event) {
+  event.preventDefault(); // prevent form from being submitted
+  playerName = document.getElementById("name-player").value;
+  if (validateInput(playerName)) {
+    // store player's name for further use
+    sessionStorage.setItem("playerName", playerName);
+    displayPlayground();
+  } else {
+    // if player's name is not valid, do nothing or show an error message
+    alert("Invalid input. Please enter a name without special characters.");
+  }
+});
+
+function validateInput(input) {
+  // Define the allowed characters - alphanumeric and space)
+  const regex = /^[a-zA-Z0-9 ]+$/;
+
+  // Test the input against the regex
+  if (!regex.test(input)) {
+    return false;
+  }
+
+  // If the input passes the test, it's valid
+  return true;
+}
+
+function prepareNewRound() {
+  backToNewRound.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
+  backToNewRound.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
+
+  if (currentRoundCount > maxNumRounds - 1) {
+    clearScores();
+  }
+}
 
 const backToIntroButton = document.querySelector("#back-to-intro-btn");
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors of 5 available gaming hands
@@ -149,7 +185,7 @@ function handClickHandler(event) {
     userChoiceText.innerHTML = "Tie!";
   } else {
     userChoiceText.innerHTML = "Your choice";
-    userChoiceText.style.color = "red"; 
+    userChoiceText.style.color = "red";
     compChoiceText.innerHTML = "Sheldon's choice";
   }
 
@@ -229,6 +265,17 @@ function displayIntro() {
 function displayPlayground() {
   displaySectionClass(".display-playground");
   hideSectionClass(".hide-playground");
+}
+
+function displayInputName() {
+  displaySection("input-name");
+  displaySection("back-to-intro");
+  hideSection("intro");
+  hideSection("playground");
+  hideSection("clock-countdown");
+  hideSection("display-result");
+  hideSection("hand-selection");
+  hideSection("back-to-new-round");
 }
 
 /**

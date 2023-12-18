@@ -30,7 +30,8 @@ h2 {
 h3,
 p,
 li,
-button {
+button,
+input {
   font-family: "Hind Madurai", sans-serif;
 }
 
@@ -50,7 +51,8 @@ h3 {
 
 p,
 li,
-button {
+button,
+input {
   font-size: clamp(0.8rem, 2vw + 0.2rem, 1.2rem);
 }
 
@@ -202,6 +204,45 @@ main {
   padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 4rem);
   line-height: 150%;
   font-size: large;
+}
+
+#input-name {
+  width: min(90vw, 800px);
+  max-width: 1000px;
+  min-height: 200px;
+  background-color: #16133c;
+  text-align: center;
+  padding-bottom: clamp(12px, 2vw, 24px);
+}
+
+#input-name--form {
+  width: 100%;
+}
+
+#name-player {
+  height: 5vh;
+  width: min(100%, 300px);
+  padding: 6px 12px;
+}
+
+#input-name--btn {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(to top, #4F8073, #C7FCEC);
+  border: 4px dotted #3866A3;
+  border-radius: 50%;
+  color: white; /* Text color */
+  padding: 6px; 
+  /* text-align: center; */
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 1rem; */
+  margin: clamp(12px, 2vw, 24px);
+}
+
+#input-name--btn:hover {
+    background: #C7FCEC;
+    background: linear-gradient(to top, #C7FCEC, #4F8073);
 }
 
 #playground {

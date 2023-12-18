@@ -61,6 +61,17 @@
       </div>
     </section>
 
+    <section id="input-name" class="hide-playground hide-clock-hands hide-intro section-flex-column">
+      <div class="run-game">
+        <h2>I am Sheldon. Wanna challenge me?</h2>
+        <p>👇 Put Your Name Here 👇</p>
+      </div>
+      <form id="input-name--form">
+        <input type="text" id="name-player" name="name-player" required>
+        <button id="input-name--btn" type="submit">Send</button>
+      </form>
+    </section>
+
     <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column">
       <div class="run-game">
         <h2>I am Sheldon. Wanna challenge me?</h2>
@@ -83,28 +94,28 @@
     </section>
 
     <section id="hand-selection" class="hide-intro hide-playground display-clock-hands">
-      <div class="hand-type section-flex-column">
+      <div id="container-rock" class="hand-type section-flex-column">
         <p></p>
         <button id="rock" class="hand-type--button"><img src="assets/images/stone.png"
             alt="hand imitates stone" /></button>
       </div>
-      <div class="hand-type section-flex-column">
+      <div id="container-paper" class="hand-type section-flex-column">
         <p></p>
         <button id="paper" class="hand-type--button"><img src="assets/images/paper.png"
             alt="hand imitates paper" /></button>
       </div>
-      <div class="hand-type section-flex-column">
+      <div id="container-scissors" class="hand-type section-flex-column">
         <p></p>
         <button id="scissors" class="hand-type--button">
           <img src="assets/images/scissors.png" alt="hand imitates scissors" />
         </button>
       </div>
-      <div class="hand-type section-flex-column">
+      <div id="container-lizard" class="hand-type section-flex-column">
         <p></p>
         <button id="lizard" class="hand-type--button"><img src="assets/images/lizard.png"
             alt="hand imitates lizard" /></button>
       </div>
-      <div class="hand-type section-flex-column">
+      <div id="container-spock" class="hand-type section-flex-column">
         <p></p>
         <button id="spock" class="hand-type--button">
           <img src="assets/images/spock.png" alt="hand imitates the traditional greeting of Spock" />
