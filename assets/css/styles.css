@@ -139,10 +139,6 @@ main {
   justify-content: space-around;
 }
 
-/* #intro {
-  margin-top: clamp(12px, 4vw, 40px);
-} */
-
 #intro > :nth-child(1) {
   letter-spacing: 2px;
   line-height: 100% !important;
@@ -203,7 +199,8 @@ main {
   justify-content: space-around;
 }
 
-#game-rules--content {
+#game-rules--content1,
+#game-rules--content2 {
   padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 4rem);
   line-height: 150%;
   font-size: large;
@@ -301,22 +298,30 @@ main {
   color: white;
 }
 
-.run-game h2 {
+.run-game > h2 {
   margin-inline: auto;
   max-width: 650px;
   padding: 0.5rem;
   border: 16px solid #4f8073;
 }
 
+.run-game > p {
+  padding-top: 6px;
+}
+
+#playground--title {
+  margin-inline: auto;
+  max-width: 650px;
+  padding: 0.5rem;
+  border: 16px solid #4f8073;
+  font-size: clamp(100%, 2.5vw, 150%);
+  letter-spacing: 2px;
+}
+
 #clock-countdown {
-  flex-basis: 60%;
-  /* margin-top: 100px; */
-  /* padding: 2rem 1rem; */
-  /* min-width: 30%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* gap: 2rem; */
 }
 
 .countdown-numbers {
@@ -326,8 +331,6 @@ main {
 
 #clock-countdown img {
   width: 100%;
-  /* margin-left: 50%;
-  transform: translateX(-50%); */
 }
 
 #display-result {
@@ -343,7 +346,7 @@ main {
 #display-result--title {
   padding: 6px;
   text-transform: capitalize;
-  font-size: 150%;
+  font-size: clamp(100%, 2.5vw, 150%);
   letter-spacing: 2px;
 }
 
@@ -512,4 +515,33 @@ footer > div {
   #clock-countdown > :nth-child(2) {
     flex-basis: 200px;
   }
+
+  #game-rules {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #game-rules--content1,
+  #game-rules--content2 {
+    padding: 0;
+  }
+
+  #game-rules--content1 {
+    transform: translateX(-6px);
+    padding-top: 4px;
+  }
+
+  #game-rules--content2 {
+    padding-bottom: 4px;
+  }
+
+  footer {
+    position: fixed;
+  }
+
+  main {
+    margin-bottom: 148px;
+  }
+
 }

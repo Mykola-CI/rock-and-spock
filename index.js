@@ -25,6 +25,8 @@ let countdownValue;
 let countdownInterval;
 let indexUser;
 let indexComp;
+let userChoiceText;
+let compChoiceText;
 
 /**
  * Setting event listener on the Window load to display intro screen
@@ -178,14 +180,13 @@ function handClickHandler(event) {
   displaySection("display-result");
   displaySection("back-to-new-round");
 
-  let userChoiceText = handButtons[indexUser].previousElementSibling;
-  let compChoiceText = handButtons[indexComp].previousElementSibling;
+  userChoiceText = handButtons[indexUser].previousElementSibling;
+  compChoiceText = handButtons[indexComp].previousElementSibling;
 
   if (indexUser === indexComp) {
     userChoiceText.innerHTML = "Tie!";
   } else {
     userChoiceText.innerHTML = `${playerName}`;
-    userChoiceText.style.color = "red";
     compChoiceText.innerHTML = "Sheldon";
   }
 
@@ -286,7 +287,7 @@ function displayInputName() {
 function defineWinner(userHand, compHand) {
   // This condition defines Winner for the round and handles scores
   if (compHand === userHand) {
-    displayResultTitle.innerText = "Damn! It's a tie!";
+    displayResultTitle.innerText = "Yahoo! It's a tie!";
   } else if (
     (userHand === 0 && (compHand === 2 || compHand === 3)) ||
     (userHand === 1 && (compHand === 0 || compHand === 4)) ||
@@ -295,12 +296,14 @@ function defineWinner(userHand, compHand) {
     (userHand === 4 && (compHand === 0 || compHand === 2))
   ) {
     displayResultTitle.innerText = `You win, ${playerName}! ${hands[userHand]} beats ${hands[compHand]}  👍`;
+    userChoiceText.style.color = "red";
     incrementScorePlayer();
   } else if (userHand === 5) {
     displayResultTitle.innerText = `Oi! No hand picked! Pity, you loose anyway!  👎`;
     incrementScoreSheldon();
   } else {
     displayResultTitle.innerText = `Ups! Bad Luck, ${playerName} ! ${hands[compHand]} beats ${hands[userHand]}  👎`;
+    compChoiceText.style.color = "red";
     incrementScoreSheldon();
   }
 
