@@ -51,7 +51,8 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(0.8rem, 1.8vw + 0.2rem, 1.2rem);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  /* font-size: 1.2rem; */
 }
 
 p,
@@ -124,7 +125,7 @@ header {
 }
 
 main {
-  min-height: 70vh;
+  min-height: 60vh;
   width: min(90vw, 1000px);
   display: flex;
   flex-direction: column;
@@ -407,22 +408,25 @@ footer {
   min-height: max-content;
   background-color: #16133c;
   color: white;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 footer > div {
-  min-height: 100px;
+  /* min-height: 100px; */
+  height: max(10vw, 150px);
   display: grid;
   grid-template-columns: 10% 4% 10% 1fr 25%;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   justify-items: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
+  padding-left: 2rem;
+  padding-top: 0.5rem;
 }
 
 .footer--grid-item {
-  padding: min(2vw, 0.5rem) min(3vw, 1.5rem);
+  padding: clamp(0.7rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
 }
 
 #footer--item-you {
@@ -431,12 +435,14 @@ footer > div {
 
 #footer--you-score {
   grid-area: 2 / 1 / 3 / 2;
-  border: 2px solid white;
+  border: 3px solid white;
+  align-self: start;
 }
 
 #footer--item-colon {
   grid-area: 2 / 2 / 3 / 3;
-  padding: 0;
+  /* padding: 0; */
+  align-self: start;
 }
 
 #footer--item-sheldon {
@@ -445,7 +451,8 @@ footer > div {
 
 #footer--sheldon-score {
   grid-area: 2 / 3 / 3 / 4;
-  border: 2px solid white;
+  border: 3px solid white;
+  align-self: start;
 }
 
 #footer--item-title {
@@ -458,7 +465,8 @@ footer > div {
 
 #footer--round-count {
   grid-area: 2 / 5 / 3 / 6;
-  border: 2px solid white;
+  border: 3px solid white;
+  align-self: start;
 }
 
 .hidden {
@@ -536,12 +544,74 @@ footer > div {
     padding-bottom: 4px;
   }
 
+  main {
+    margin-bottom: 180px;
+  }
+
   footer {
     position: fixed;
+    /* width: 100vw; */
   }
 
-  main {
-    margin-bottom: 148px;
+  footer h3 {
+    font-size: clamp(0.8rem, 5vw, 1rem);
   }
 
+  footer > div {
+    width: 100%;
+    grid-template-columns: 2fr 1fr 3fr 3fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    padding-left: 0;
+  }
+
+  .footer--grid-item {
+    padding: 0.5rem 1rem;
+  }
+
+  #footer--item-title {
+    grid-area: 1 / 1 / 2 / 5;
+    padding-top: 0.5rem;
+  }
+
+  #footer--item-you {
+    grid-area: 2 / 1 / 3 / 2;
+    justify-self: end;
+    padding-right: 3px;
+  }
+
+  #footer--you-score {
+    grid-area: 3 / 1 / 4 / 2;
+    border: 3px solid white;
+    justify-self: end;
+    /* align-self: start; */
+  }
+
+  #footer--item-colon {
+    grid-area: 3 / 2 / 4 / 3;
+    /* padding: 0; */
+    /* align-self: start; */
+  }
+
+  #footer--item-sheldon {
+    grid-area: 2 / 3 / 3 / 4;
+    justify-self: start;
+    padding-left: 0;
+  }
+
+  #footer--sheldon-score {
+    grid-area: 3 / 3 / 4 / 4;
+    border: 3px solid white;
+    justify-self: start;
+    /* align-self: start; */
+  }
+
+  #footer--item-round {
+    grid-area: 2 / 4 / 3 / 5;
+  }
+
+  #footer--round-count {
+    grid-area: 3 / 4 / 4 / 5;
+    border: 3px solid white;
+    /* align-self: start; */
+  }
 }

@@ -1,4 +1,4 @@
-const maxNumRounds = 5; // put for convenience of developer to change maximum number of rounds 
+const maxNumRounds = 5; // put for convenience of developer to change maximum number of rounds
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors for 5 available gaming hands
 const soundToggleButtons = document.getElementsByClassName("sound-toggle");
 const footerRoundCount = document.querySelector("#footer--round-count>h3");
@@ -37,7 +37,8 @@ window.onload = (event) => {
   const goPlaygroundButton = document.getElementById("start-playground--button");
   const video = document.querySelector("#intro-video>video");
   soundEnabled = false;
-footerItemTitle.innerHTML = `Maximum Number of Rounds Per Game = ${maxNumRounds} `
+  footerItemTitle.innerHTML = `Max. Number of Rounds Per Game = ${maxNumRounds} `;
+
   /**
    * Setting event listener for the only button on the intro screen that gets you
    * to the Playground screen
@@ -62,6 +63,9 @@ footerItemTitle.innerHTML = `Maximum Number of Rounds Per Game = ${maxNumRounds}
   });
 };
 
+/**
+ * Listen to the submit button, handles player's name input
+ */
 document.getElementById("input-name--form").addEventListener("submit", function (event) {
   event.preventDefault(); // prevent form from being submitted
   playerName = document.getElementById("name-player").value;
@@ -87,15 +91,6 @@ function validateInput(input) {
 
   // If the input passes the test, it's valid
   return true;
-}
-
-function prepareNewRound() {
-  backToNewRound.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 10 rounds starts
-  backToNewRound.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
-
-  if (currentRoundCount > maxNumRounds - 1) {
-    clearScores();
-  }
 }
 
 /**
@@ -127,7 +122,7 @@ startRoundBtn.addEventListener("click", function () {
   countdownValue = 5; // this is for countdown starting from 5 in sec.
   countdownDisplays.forEach((display) => (display.innerText = countdownValue)); // displays initial number of the countdown left and right from the running clock
   /**
-   * Sets recurring intervals of 1 sec from 5 to 1
+   * Sets recurring intervals of 1 sec from 5 to 1 to display countdown sequence
    */
   countdownInterval = setInterval(function () {
     countdownValue--;
@@ -143,13 +138,13 @@ startRoundBtn.addEventListener("click", function () {
    * Sets the delay time 5sec for the function defineWinner to implement
    * in case the Player fails to select the hand within 5 sec
    */
-  // timeoutID = setTimeout(function () {
-  //   hideSection("clock-countdown");
-  //   hideSection("hand-selection");
-  //   displaySection("display-result");
-  //   defineWinner(5, indexComp);
-  //   displaySection("back-to-new-round");
-  // }, 5000);
+  timeoutID = setTimeout(function () {
+    hideSection("clock-countdown");
+    hideSection("hand-selection");
+    displaySection("display-result");
+    defineWinner(5, indexComp);
+    displaySection("back-to-new-round");
+  }, 5000);
 
   /**
    * On click event launches the handClickHandler function, which deals with the selected hand
@@ -209,7 +204,7 @@ function handClickHandler(event) {
 }
 
 /**
- * Provides for the toggle effect for one and the same button
+ * Provides for the toggle effect for the sound on/off button
  */
 function toggleSound() {
   soundEnabled = !soundEnabled;
@@ -219,6 +214,18 @@ function toggleSound() {
     } else {
       icon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
     }
+  }
+}
+
+/**
+ * Removes listeners before the new round and clears scores before the new game
+ */
+function prepareNewRound() {
+  backToNewRound.removeEventListener("click", clearTimeNewRound); // must be removed before new game of 5 rounds starts
+  backToNewRound.removeEventListener("click", clearTimeIntroResults); // if not removed they remain attached and cause bugs in conditional statements
+
+  if (currentRoundCount > maxNumRounds - 1) {
+    clearScores();
   }
 }
 
@@ -258,17 +265,26 @@ function displaySectionClass(className) {
   }
 }
 
+/**
+ * Displays the Intro screen with video and rules
+ */
 function displayIntro() {
   displaySectionClass(".display-intro");
   hideSectionClass(".hide-intro");
 }
 
+/**
+ * Displays Start New Round screen, update the title with the personal address 
+ */
 function displayPlayground() {
   displaySectionClass(".display-playground");
   hideSectionClass(".hide-playground");
-  playgroundTitle.innerHTML = `Well, ${playerName}! You'll have 5 sec to pick a hand!`
+  playgroundTitle.innerHTML = `Well, ${playerName}! You'll have 5 sec to pick a hand!`;
 }
 
+/**
+ * Displays the screen for the Player's name input
+ */
 function displayInputName() {
   displaySection("input-name");
   displaySection("back-to-intro");
@@ -281,8 +297,8 @@ function displayInputName() {
 }
 
 /**
- * Major function that randomly generates computer's hand.
- * Executes the logic of defining the winner and display the result messages
+ * Major function that randomly generates computer's hand,
+ * executes the logic of defining the winner and display the result messages
  */
 function defineWinner(userHand, compHand) {
   // This condition defines Winner for the round and handles scores
@@ -312,9 +328,9 @@ function defineWinner(userHand, compHand) {
     /**
      * Delays 10sec change of screen to the new round if player fails to click to return
      */
-    // timeoutReturn = setTimeout(function () {
-    //   displayPlayground();
-    // }, 10000);
+    timeoutReturn = setTimeout(function () {
+      displayPlayground();
+    }, 10000);
 
     /**
      * Upon the click the event returns player to the new round screen, clears timeout
@@ -326,14 +342,13 @@ function defineWinner(userHand, compHand) {
      * Delays 10sec change of screen to the intro page when the max number of rounds has been reached
      * if player fails to click to return
      */
-    // timeoutReturn = setTimeout(function () {
-    //   displayIntro();
-    //   lastGameResults();
-    // }, 5000);
+    timeoutReturn = setTimeout(function () {
+      displayIntro();
+      lastGameResults();
+    }, 5000);
 
     /**
-     * Upon the click the event returns player to the new round screen, when the max number of rounds
-     * has been reached, clears timeout.
+     * Clears timeout. When the max number of rounds has been reached returns player to the Intro screen, 
      * To avoid bugs these listeners require remove method when the new game begins and scores are cleared
      */
     backToNewRound.addEventListener("click", clearTimeIntroResults);
@@ -389,7 +404,7 @@ function clearScores() {
   footerSheldonScore.innerText = 0;
   footerYouScore.innerText = 0;
   currentRoundCount = 0;
-  footerItemTitle.innerText = `Maximum Number Of Rounds Per Game = ${maxNumRounds}`;
+  footerItemTitle.innerText = `Max. Number Of Rounds Per Game = ${maxNumRounds}`;
 }
 
 /**
