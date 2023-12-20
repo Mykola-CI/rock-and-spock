@@ -415,10 +415,10 @@ function lastGameResults() {
   let lastScorePlayer = parseInt(footerYouScore.innerText);
   let lastScoreSheldon = parseInt(footerSheldonScore.innerText);
   if (lastScoreSheldon > lastScorePlayer) {
-    footerItemTitle.innerText = `Regret to say but You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
+    footerItemTitle.innerText = `Ah! You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
   } else if (lastScoreSheldon < lastScorePlayer) {
-    footerItemTitle.innerText = `What can I say, You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
+    footerItemTitle.innerText = `Hey! You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
   } else {
-    footerItemTitle.innerText = `Miraculously, You managed to tie with me! 🤔`;
+    footerItemTitle.innerText = `You managed to tie with me! 🤔`;
   }
 }
