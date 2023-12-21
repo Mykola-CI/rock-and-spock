@@ -1,20 +1,20 @@
 const maxNumRounds = 5; // put for convenience of developer to change maximum number of rounds
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors for 5 available gaming hands
-const soundToggleButtons = document.getElementsByClassName("sound-toggle");
-const footerRoundCount = document.querySelector("#footer--round-count>h3");
-const playgroundTitle = document.getElementById("playground--title");
-const footerScoreTitle = document.querySelector("#footer--item-you>h3");
+const soundToggleButton = document.getElementById("sound-toggle");
+const footerRoundCount = document.querySelector("#footer-round-count>h3");
+const playgroundTitle = document.getElementById("playground-title");
+const footerScoreTitle = document.querySelector("#footer-item-you>h3");
 const backToIntroButton = document.querySelector("#back-to-intro-btn");
 const handButtons = document.querySelectorAll(".hand-type--button");
 const startRoundBtn = document.getElementById("start-control");
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 const countdownDisplays = document.querySelectorAll(".countdown-numbers");
-const displayResultTitle = document.getElementById("display-result--title");
+const displayResultTitle = document.getElementById("display-result-title");
 const backToNewRound = document.getElementById("back-to-new-round-btn");
-const footerYouScore = document.querySelector("#footer--you-score>h3");
-const footerSheldonScore = document.querySelector("#footer--sheldon-score>h3");
-const footerItemTitle = document.querySelector("#footer--item-title>h3");
+const footerYouScore = document.querySelector("#footer-you-score>h3");
+const footerSheldonScore = document.querySelector("#footer-sheldon-score>h3");
+const footerItemTitle = document.querySelector("#footer-item-title>h3");
 
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let soundEnabled;
@@ -34,7 +34,7 @@ let compChoiceText;
  * */
 window.onload = (event) => {
   displayIntro();
-  const goPlaygroundButton = document.getElementById("start-playground--button");
+  const goPlaygroundButton = document.getElementById("start-playground-button");
   const video = document.querySelector("#intro-video>video");
   soundEnabled = false;
   footerItemTitle.innerHTML = `Max. Number of Rounds Per Game = ${maxNumRounds} `;
@@ -66,7 +66,7 @@ window.onload = (event) => {
 /**
  * Listen to the submit button, handles player's name input
  */
-document.getElementById("input-name--form").addEventListener("submit", function (event) {
+document.getElementById("input-name-form").addEventListener("submit", function (event) {
   event.preventDefault(); // prevent form from being submitted
   playerName = document.getElementById("name-player").value;
   if (validateInput(playerName)) {
@@ -97,9 +97,7 @@ function validateInput(input) {
  * Loop that iterates 2 identical icons at top left and right corners of the header.
  * It adds event listeners to toggle sounds. Both icons operate the same way
  */
-for (let icon of soundToggleButtons) {
-  icon.addEventListener("click", toggleSound);
-}
+soundToggleButton.addEventListener("click", toggleSound);
 
 /**
  * the click event on the button starts a round, sets timeout and displays hands to pick
@@ -207,14 +205,14 @@ function handClickHandler(event) {
  * Provides for the toggle effect for the sound on/off button
  */
 function toggleSound() {
+
   soundEnabled = !soundEnabled;
-  for (let icon of soundToggleButtons) {
+
     if (soundEnabled) {
-      icon.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+      soundToggleButton.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
     } else {
-      icon.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+      soundToggleButton.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
     }
-  }
 }
 
 /**

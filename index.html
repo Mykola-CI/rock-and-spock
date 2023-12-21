@@ -20,9 +20,9 @@
 <body>
   <header>
     <div id="header-grid-container">
-      <button class="sound-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
+      <p class="sound-toggle"></p>
       <h1>The Realm Of Rock & Spock</h1>
-      <button class="sound-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
+      <button id="sound-toggle" class="sound-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
     </div>
     <div id="back-to-intro" class="hide-intro hide-clock-hands display-playground">
       <button id="back-to-intro-btn">👈 Back to the intro page 👈</button>
@@ -36,12 +36,12 @@
         &nbsp;&nbsp;lizard&nbsp;&nbsp; || &nbsp;&nbsp;spock</h2>
       <div id="intro-video"><video src="assets/video/sheldon-rules-of-the-game.mp4" controls playsinline muted></div>
       <div id="start-playground" class="section-flex-column">
-        <button id="start-playground--button">Play Game!</button>
+        <button id="start-playground-button">Play Game!</button>
       </div>
       <h2>Rules of Sheldon and Co</h2>
       <div id="game-rules">
         <div class="game-rules">
-          <ul id="game-rules--content1">
+          <ul id="game-rules-content1">
             <li>Scissors cut Paper</li>
             <li>Paper covers Rock</li>
             <li>Rock crashes Lizard</li>
@@ -50,7 +50,7 @@
           </ul>
         </div>
         <div class="game-rules">
-          <ul id="game-rules--content2">
+          <ul id="game-rules-content2">
             <li>Scissors decapitate Lizard</li>
             <li>Lizard eats Paper</li>
             <li>Paper disprove Spock</li>
@@ -66,15 +66,15 @@
         <h2>I am Sheldon. Wanna challenge me?</h2>
         <p>👇 Put your Name here and let's get started! 👇</p>
       </div>
-      <form id="input-name--form">
+      <form id="input-name-form">
         <input type="text" id="name-player" name="name-player" required>
-        <button id="input-name--btn" type="submit">Send</button>
+        <button id="input-name-btn" type="submit">Send</button>
       </form>
     </section>
 
     <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column">
       <div class="run-game">
-        <h3 id="playground--title"></h3>
+        <h3 id="playground-title"></h3>
         <p>👇 Click the Diagram 👇</p>
       </div>
       <button id="start-control" class="stacked-grid">
@@ -90,7 +90,7 @@
     </section>
 
     <section id="display-result" class="hide-intro hide-playground hide-clock-hands section-flex-column">
-      <p id="display-result--title"></p>
+      <p id="display-result-title"></p>
     </section>
 
     <section id="hand-selection" class="hide-intro hide-playground display-clock-hands">
@@ -133,28 +133,28 @@
 
   <footer>
     <div>
-      <div id="footer--item-you" class="footer--grid-item">
+      <div id="footer-item-you" class="footer--grid-item">
         <h3>You</h3>
       </div>
-      <div id="footer--you-score" class="footer--grid-item">
+      <div id="footer-you-score" class="footer--grid-item footer--border">
         <h3>0</h3>
       </div>
-      <div id="footer--item-colon" class="footer--grid-item">
+      <div id="footer-item-colon" class="footer--grid-item">
         <h3>:</h3>
       </div>
-      <div id="footer--item-sheldon" class="footer--grid-item">
+      <div id="footer-item-sheldon" class="footer--grid-item">
         <h3>Sheldon</h3>
       </div>
-      <div id="footer--sheldon-score" class="footer--grid-item">
+      <div id="footer-sheldon-score" class="footer--grid-item footer--border">
         <h3>0</h3>
       </div>
-      <div id="footer--item-title" class="footer--grid-item">
+      <div id="footer-item-title" class="footer--grid-item">
         <h3></h3>
       </div>
-      <div id="footer--item-round" class="footer--grid-item">
+      <div id="footer-item-round" class="footer--grid-item">
         <h3>Round</h3>
       </div>
-      <div id="footer--round-count" class="footer--grid-item">
+      <div id="footer-round-count" class="footer--grid-item footer--border">
         <h3>0</h3>
       </div>
     </div>
