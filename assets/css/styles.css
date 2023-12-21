@@ -46,7 +46,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(1rem, 2vw, 1.7rem);
+  font-size: clamp(1rem, 2vw + 00.5rem, 1.7rem);
   /* line-height: 150%; */
 }
 
@@ -218,11 +218,13 @@ main {
 
 #input-name-form {
   width: 100%;
+  padding-top: 16px;
 }
 
 #name-player {
-  /* height: 5vh; */
-  width: min(100%, 300px);
+  margin-inline: auto;
+  margin-bottom: 12px;
+  width: min(92%, 300px);
   padding: 6px 12px;
 }
 
@@ -236,7 +238,7 @@ main {
   padding: 6px;
   text-decoration: none;
   display: inline-block;
-  /* margin: clamp(12px, 2vw, 24px); */
+  margin: 16px;
 }
 
 #input-name-btn:hover {
@@ -424,7 +426,7 @@ footer > div {
 }
 
 .footer--grid-item h3 {
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1.5rem;
 }
 
 .footer--border h3 {
