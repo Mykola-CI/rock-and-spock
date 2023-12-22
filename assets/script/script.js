@@ -1,6 +1,6 @@
 // Utility variables
 const maxNumRounds = 5; // Introduced for convenience of game code handler to change maximum number of rounds
-const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings - id selectors for 5 available gaming hands
+const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings identical to id selectors for 5 available gaming hands
 const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
 const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
 
@@ -26,9 +26,14 @@ const footerSheldonScore = document.querySelector("#footer-sheldon-score>h3");
 const footerItemTitle = document.querySelector("#footer-item-title>h3");
 
 // Global Variables To Store Data And Make Them Accessible Across Functions:
+
+// Scores, round and game counters, Player's name
 let soundEnabled;
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let playerName;
+let numGamesPlayed = 0;
+let gameScoreSheldon = 0;
+let gameScorePlayer = 0;
 
 // Store the data on selected hands
 let indexUser;
@@ -95,7 +100,7 @@ document.getElementById("input-name-form").addEventListener("submit", function (
 });
 
 /**
- * The click event on the button starts a round, sets timeout and displays hands to pick
+ * The click event on the button that starts a round, sets timeout and displays hands to pick
  */
 startRoundBtn.addEventListener("click", function () {
   if (soundEnabled) {
@@ -384,7 +389,6 @@ function incrementScoreSheldon() {
  * Increment the number of rounds played
  */
 function incrementRoundCount() {
-  // let oldCount = parseInt(footerRoundCount.innerText);
   footerRoundCount.innerText = ++currentRoundCount;
 }
 
@@ -400,17 +404,24 @@ function clearScores() {
 }
 
 /**
- * Display messages to the intro screen Footer about a Winner or a tie after the game has ended,
- * i.e. the maximum number of rounds has been played
+ * Display to the Intro screen Footer the total number of Games played and who leads in game score
  */
 function lastGameResults() {
   let lastScorePlayer = parseInt(footerYouScore.innerText);
   let lastScoreSheldon = parseInt(footerSheldonScore.innerText);
+  numGamesPlayed++;
   if (lastScoreSheldon > lastScorePlayer) {
-    footerItemTitle.innerText = `Ah! You lost the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🥱`;
+    gameScoreSheldon++;
   } else if (lastScoreSheldon < lastScorePlayer) {
-    footerItemTitle.innerText = `Hey! You won the last game: ${lastScorePlayer} to ${lastScoreSheldon} 🤥`;
-  } else {
-    footerItemTitle.innerText = `You managed to tie with me! 🤔`;
+    gameScorePlayer++;
   }
+
+  if (gameScoreSheldon > gameScorePlayer) {
+    footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  Sheldon leads: \u00A0 ${gameScoreSheldon} to ${gameScorePlayer} \u00A0 🥱`;
+  } else if (gameScoreSheldon < gameScorePlayer) {
+    footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  ${playerName} leads: \u00A0 ${gameScorePlayer} to ${gameScoreSheldon} \u00A0 🤥`;
+  } else {
+    footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  It's a tie \u00A0 ${gameScorePlayer} : ${gameScoreSheldon}  for now 🤔`;
+  }
+  
 }
