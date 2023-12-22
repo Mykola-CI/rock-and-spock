@@ -319,11 +319,11 @@ function defineWinner(userHand, compHand) {
     (userHand === 3 && (compHand === 1 || compHand === 4)) ||
     (userHand === 4 && (compHand === 0 || compHand === 2))
   ) {
-    displayResultTitle.innerText = `You win, ${playerName}! ${hands[userHand]} beats ${hands[compHand]}  👍`;
+    displayResultTitle.innerText = `You won, ${playerName}! ${hands[userHand]} beats ${hands[compHand]}  👍`;
     userChoiceText.style.color = "red";
     incrementScorePlayer();
   } else if (userHand === 5) {
-    displayResultTitle.innerText = `Oi! No hand picked! Pity, you loose anyway!  👎`;
+    displayResultTitle.innerText = `Oi! No hand picked! Pity, you lose anyway!  👎`;
     incrementScoreSheldon();
   } else {
     displayResultTitle.innerText = `Ups! Bad Luck, ${playerName} ! ${hands[compHand]} beats ${hands[userHand]}  👎`;
