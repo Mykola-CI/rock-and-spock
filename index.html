@@ -1,166 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Mykola Kuievda" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="Mykola Kuievda" />
-  <!-- Meta tags for search engines -->
-  <meta name="description"
-    content="Rock and Spock. Online game Rock Scissors Paper Lizard Spock. As made famous by Big Bang Theory series episodes" />
-  <meta name="keywords"
-    content="rock, scissors, paper, lizard, spock, online game, simple game, fun game, game of chance" />
-  <!-- Fontawesome kit -->
-  <script src="https://kit.fontawesome.com/e0f7937b3c.js" crossorigin="anonymous"></script>
+    <!-- Meta tags for search engines -->
+    <meta
+      name="description"
+      content="Rock and Spock. Online game Rock Scissors Paper Lizard Spock. As made famous by Big Bang Theory series episodes" />
+    <meta name="keywords" content="rock, scissors, paper, lizard, spock, online game, simple game, fun game, game of chance" />
 
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <title>Rock and Spock</title>
-</head>
+    <!-- Fontawesome kit -->
+    <script src="https://kit.fontawesome.com/e0f7937b3c.js" crossorigin="anonymous"></script>
 
-<body>
-  <header>
-    <div id="header-grid-container">
-      <p class="sound-toggle"></p>
-      <h1>The Realm Of Rock & Spock</h1>
-      <button id="sound-toggle" class="sound-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
-    </div>
-    <div id="back-to-intro" class="hide-intro hide-clock-hands display-playground">
-      <button id="back-to-intro-btn">👈 Back to the intro page 👈</button>
-    </div>
-  </header>
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>Rock and Spock</title>
+  </head>
 
-  <main>
-
-    <section id="intro" class="display-intro hide-playground section-flex-column">
-      <h2>rock &nbsp;&nbsp;||&nbsp;&nbsp; paper&nbsp;&nbsp; ||&nbsp;&nbsp; scissors&nbsp;&nbsp; ||
-        &nbsp;&nbsp;lizard&nbsp;&nbsp; || &nbsp;&nbsp;spock</h2>
-      <div id="intro-video"><video src="assets/video/sheldon-rules-of-the-game.mp4" controls playsinline muted></div>
-      <div id="start-playground" class="section-flex-column">
-        <button id="start-playground-button">Play Game!</button>
-      </div>
-      <h2>Rules of Sheldon and Co</h2>
-      <div id="game-rules">
-        <div class="game-rules">
-          <ul id="game-rules-content1">
-            <li>Scissors cut Paper</li>
-            <li>Paper covers Rock</li>
-            <li>Rock crashes Lizard</li>
-            <li>Lizard poisons Spock</li>
-            <li>Spock smashes Scissors</li>
-          </ul>
-        </div>
-        <div class="game-rules">
-          <ul id="game-rules-content2">
-            <li>Scissors decapitate Lizard</li>
-            <li>Lizard eats Paper</li>
-            <li>Paper disprove Spock</li>
-            <li>Spock vaporizes Rock</li>
-            <li>Rock crashes Scissors</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="input-name" class="hide-playground hide-clock-hands hide-intro section-flex-column">
-      <div class="run-game">
-        <h2>I am Sheldon. Wanna challenge me?</h2>
-        <p>👇 Put your Name here and let's get started! 👇</p>
-      </div>
-      <form id="input-name-form">
-        <input type="text" id="name-player" name="name-player" required>
-        <button id="input-name-btn" type="submit">Send</button>
-      </form>
-    </section>
-
-    <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column">
-      <div class="run-game">
-        <h3 id="playground-title"></h3>
-        <p>👇 Click the Diagram 👇</p>
-      </div>
-      <button id="start-control" class="stacked-grid">
-        <img src="assets/images/rpsls-diagram.png" alt="Diagram of rules of the game how define winner">
-        <p>Click<br>Here!</p>
-      </button>
-    </section>
-
-    <section id="clock-countdown" class="hide-intro hide-playground display-clock-hands">
-      <div class="countdown-numbers"></div>
-      <div><img src="assets/images/clock-ticking.gif" alt="Man running around clock face" /></div>
-      <div class="countdown-numbers"></div>
-    </section>
-
-    <section id="display-result" class="hide-intro hide-playground hide-clock-hands section-flex-column">
-      <p id="display-result-title"></p>
-    </section>
-
-    <section id="hand-selection" class="hide-intro hide-playground display-clock-hands">
-      <div id="container-rock" class="hand-type section-flex-column">
-        <p></p>
-        <button id="rock" class="hand-type--button"><img src="assets/images/stone.png"
-            alt="hand imitates stone" /></button>
-      </div>
-      <div id="container-paper" class="hand-type section-flex-column">
-        <p></p>
-        <button id="paper" class="hand-type--button"><img src="assets/images/paper.png"
-            alt="hand imitates paper" /></button>
-      </div>
-      <div id="container-scissors" class="hand-type section-flex-column">
-        <p></p>
-        <button id="scissors" class="hand-type--button">
-          <img src="assets/images/scissors.png" alt="hand imitates scissors" />
+  <body>
+    <header>
+      <div id="header-grid-container">
+        <p class="sound-toggle"></p>
+        <h1>The Realm Of Rock & Spock</h1>
+        <button
+          id="sound-toggle"
+          class="sound-toggle"
+          aria-label="the button in the form of loudspeaker to toggle the sound on and off">
+          <i class="fa-solid fa-volume-xmark"></i>
         </button>
       </div>
-      <div id="container-lizard" class="hand-type section-flex-column">
-        <p></p>
-        <button id="lizard" class="hand-type--button"><img src="assets/images/lizard.png"
-            alt="hand imitates lizard" /></button>
+      <div id="back-to-intro" class="hide-intro hide-clock-hands display-playground">
+        <button id="back-to-intro-btn">👈 Back to the intro page 👈</button>
       </div>
-      <div id="container-spock" class="hand-type section-flex-column">
-        <p></p>
-        <button id="spock" class="hand-type--button">
-          <img src="assets/images/spock.png" alt="hand imitates the traditional greeting of Spock" />
-        </button>
-      </div>
-    </section>
+    </header>
 
-    <section id="back-to-new-round" class="hide-intro hide-playground hide-clock-hands">
+    <main>
+      <section id="intro" class="display-intro hide-playground section-flex-column">
+        <h2>
+          rock &nbsp;&nbsp;||&nbsp;&nbsp; paper&nbsp;&nbsp; ||&nbsp;&nbsp; scissors&nbsp;&nbsp; || &nbsp;&nbsp;lizard&nbsp;&nbsp;
+          || &nbsp;&nbsp;spock
+        </h2>
+        <div id="intro-video">
+          <video controls playsinline muted>
+            <source src="assets/video/sheldon-rules-of-the-game.mp4" type="video/mp4" />
+            <track kind="captions" src="assets/video/sheldon-rules-of-the-game.vtt" srclang="en" />
+          </video>
+        </div>
+        <div id="start-playground" class="section-flex-column">
+          <button id="start-playground-button">Play Game!</button>
+        </div>
+        <h2>Rules of Sheldon and Co</h2>
+        <div id="game-rules">
+          <div class="game-rules">
+            <ul id="game-rules-content1">
+              <li>Scissors cut Paper</li>
+              <li>Paper covers Rock</li>
+              <li>Rock crashes Lizard</li>
+              <li>Lizard poisons Spock</li>
+              <li>Spock smashes Scissors</li>
+            </ul>
+          </div>
+          <div class="game-rules">
+            <ul id="game-rules-content2">
+              <li>Scissors decapitate Lizard</li>
+              <li>Lizard eats Paper</li>
+              <li>Paper disprove Spock</li>
+              <li>Spock vaporizes Rock</li>
+              <li>Rock crashes Scissors</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="input-name" class="hide-playground hide-clock-hands hide-intro section-flex-column">
+        <div class="run-game">
+          <h2>I am Sheldon. Wanna challenge me?</h2>
+          <p>👇 Put your Name here and let's get started! 👇</p>
+        </div>
+        <form id="input-name-form">
+          <input type="text" id="name-player" name="name-player" required />
+          <button id="input-name-btn" type="submit">Send</button>
+        </form>
+      </section>
+
+      <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column">
+        <div class="run-game">
+          <h3 id="playground-title"></h3>
+          <p>👇 Click the Diagram 👇</p>
+        </div>
+        <button id="start-control" class="stacked-grid">
+          <img src="assets/images/rpsls-diagram.png" alt="Diagram of rules of the game how define winner" />
+          <p>Click<br />Here!</p>
+        </button>
+      </section>
+
+      <section id="clock-countdown" class="hide-intro hide-playground display-clock-hands">
+        <div class="countdown-numbers"></div>
+        <div><img src="assets/images/clock-ticking.gif" alt="Man running around clock face" /></div>
+        <div class="countdown-numbers"></div>
+      </section>
+
+      <section id="display-result" class="hide-intro hide-playground hide-clock-hands section-flex-column">
+        <p id="display-result-title"></p>
+      </section>
+
+      <section id="hand-selection" class="hide-intro hide-playground display-clock-hands">
+        <div id="container-rock" class="hand-type section-flex-column">
+          <p></p>
+          <button id="rock" class="hand-type--button"><img src="assets/images/stone.png" alt="hand imitates stone" /></button>
+        </div>
+        <div id="container-paper" class="hand-type section-flex-column">
+          <p></p>
+          <button id="paper" class="hand-type--button"><img src="assets/images/paper.png" alt="hand imitates paper" /></button>
+        </div>
+        <div id="container-scissors" class="hand-type section-flex-column">
+          <p></p>
+          <button id="scissors" class="hand-type--button">
+            <img src="assets/images/scissors.png" alt="hand imitates scissors" />
+          </button>
+        </div>
+        <div id="container-lizard" class="hand-type section-flex-column">
+          <p></p>
+          <button id="lizard" class="hand-type--button"><img src="assets/images/lizard.png" alt="hand imitates lizard" /></button>
+        </div>
+        <div id="container-spock" class="hand-type section-flex-column">
+          <p></p>
+          <button id="spock" class="hand-type--button">
+            <img src="assets/images/spock.png" alt="hand imitates the traditional greeting of Spock" />
+          </button>
+        </div>
+      </section>
+
+      <section id="back-to-new-round" class="hide-intro hide-playground hide-clock-hands">
+        <div>
+          <button id="back-to-new-round-btn">Back to New Round</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
       <div>
-        <button id="back-to-new-round-btn">Back to New Round</button>
+        <div id="footer-item-you" class="footer--grid-item">
+          <h3>You</h3>
+        </div>
+        <div id="footer-you-score" class="footer--grid-item footer--border">
+          <h3>0</h3>
+        </div>
+        <div id="footer-item-colon" class="footer--grid-item">
+          <h3>:</h3>
+        </div>
+        <div id="footer-item-sheldon" class="footer--grid-item">
+          <h3>Sheldon</h3>
+        </div>
+        <div id="footer-sheldon-score" class="footer--grid-item footer--border">
+          <h3>0</h3>
+        </div>
+        <div id="footer-item-title" class="footer--grid-item">
+          <h3></h3>
+        </div>
+        <div id="footer-item-round" class="footer--grid-item">
+          <h3>Round</h3>
+        </div>
+        <div id="footer-round-count" class="footer--grid-item footer--border">
+          <h3>0</h3>
+        </div>
       </div>
-    </section>
+    </footer>
 
-  </main>
-
-  <footer>
-    <div>
-      <div id="footer-item-you" class="footer--grid-item">
-        <h3>You</h3>
-      </div>
-      <div id="footer-you-score" class="footer--grid-item footer--border">
-        <h3>0</h3>
-      </div>
-      <div id="footer-item-colon" class="footer--grid-item">
-        <h3>:</h3>
-      </div>
-      <div id="footer-item-sheldon" class="footer--grid-item">
-        <h3>Sheldon</h3>
-      </div>
-      <div id="footer-sheldon-score" class="footer--grid-item footer--border">
-        <h3>0</h3>
-      </div>
-      <div id="footer-item-title" class="footer--grid-item">
-        <h3></h3>
-      </div>
-      <div id="footer-item-round" class="footer--grid-item">
-        <h3>Round</h3>
-      </div>
-      <div id="footer-round-count" class="footer--grid-item footer--border">
-        <h3>0</h3>
-      </div>
-    </div>
-  </footer>
-
-  <script src="assets/script/script.js"></script>
-</body>
-
+    <script src="assets/script/script.js"></script>
+  </body>
 </html>
