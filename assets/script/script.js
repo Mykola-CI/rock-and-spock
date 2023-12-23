@@ -24,6 +24,7 @@ const footerRoundCount = document.querySelector("#footer-round-count>h3");
 const footerYouScore = document.querySelector("#footer-you-score>h3");
 const footerSheldonScore = document.querySelector("#footer-sheldon-score>h3");
 const footerItemTitle = document.querySelector("#footer-item-title>h3");
+
 footerItemTitle.innerHTML = `Max. Number of Rounds Per Game = ${maxNumRounds}`;
 
 // Global Variables To Store Data And Make Them Accessible Across Functions:
@@ -50,7 +51,7 @@ let countdownInterval;
 
 /**
  * the Window load event listener to display Intro screen
- * and provide for its full functionality
+ * and provide for its full functionality before the button is hit
  * */
 window.onload = (event) => {
 
@@ -418,7 +419,7 @@ function lastGameResults() {
   } else if (gameScoreSheldon < gameScorePlayer) {
     footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  ${playerName} leads: \u00A0 ${gameScorePlayer} to ${gameScoreSheldon} \u00A0 🤥`;
   } else {
-    footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  It's a tie \u00A0 ${gameScorePlayer} : ${gameScoreSheldon}  for now 🤔`;
+    footerItemTitle.innerText = `Total Games: ${numGamesPlayed}. \u00A0  It's a tie \u00A0 ${gameScorePlayer} : ${gameScoreSheldon} \u00A0 for now 🤔`;
   }
   
 }
