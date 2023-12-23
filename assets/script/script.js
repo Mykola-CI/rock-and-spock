@@ -24,11 +24,12 @@ const footerRoundCount = document.querySelector("#footer-round-count>h3");
 const footerYouScore = document.querySelector("#footer-you-score>h3");
 const footerSheldonScore = document.querySelector("#footer-sheldon-score>h3");
 const footerItemTitle = document.querySelector("#footer-item-title>h3");
+footerItemTitle.innerHTML = `Max. Number of Rounds Per Game = ${maxNumRounds}`;
 
 // Global Variables To Store Data And Make Them Accessible Across Functions:
 
 // Scores, round and game counters, Player's name
-let soundEnabled;
+let soundEnabled = false;
 let currentRoundCount = parseInt(footerRoundCount.innerText);
 let playerName;
 let numGamesPlayed = 0;
@@ -52,10 +53,6 @@ let countdownInterval;
  * and provide for its full functionality
  * */
 window.onload = (event) => {
-  soundEnabled = false; // Load with sound off
-  displayIntro();
-
-  footerItemTitle.innerHTML = `Max. Number of Rounds Per Game = ${maxNumRounds}`;
 
   // Gates to the Playground screen
   const goPlaygroundButton = document.getElementById("start-playground-button");

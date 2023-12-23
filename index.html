@@ -87,7 +87,7 @@
       </section>
 
       <!-- Section for the form with Player's name input -->
-      <section id="input-name" class="hide-playground hide-clock-hands hide-intro section-flex-column">
+      <section id="input-name" class="hide-playground hide-clock-hands hide-intro section-flex-column hidden">
         <div class="run-game">
           <h2>I am Sheldon. Wanna challenge me?</h2>
           <p>👇 Put your Name here and let's get started! 👇</p>
@@ -99,31 +99,31 @@
       </section>
 
       <!-- Playground section, contains the main button to start the round -->
-      <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column">
+      <section id="playground" class="display-playground hide-clock-hands hide-intro section-flex-column hidden">
         <div class="run-game">
           <h3 id="playground-title"></h3>
           <p>👇 Click the Diagram 👇</p>
         </div>
         <button id="start-control" class="stacked-grid">
           <img src="assets/images/rpsls-diagram.png" alt="Schematic Diagram of rules of the game how define winner" />
-          <p>Click<br />Here!</p>
+          <p>Start<br />Round!</p>
         </button>
       </section>
 
       <!-- Clock running and countdown numbers section -->
-      <section id="clock-countdown" class="hide-intro hide-playground display-clock-hands">
+      <section id="clock-countdown" class="hide-intro hide-playground display-clock-hands hidden">
         <div class="countdown-numbers"></div>
         <div><img src="assets/images/clock-ticking.gif" alt="Man running around clock face" /></div>
         <div class="countdown-numbers"></div>
       </section>
 
       <!-- section that displays congratulation commiseration messages on the round end   -->
-      <section id="display-result" class="hide-intro hide-playground hide-clock-hands section-flex-column">
+      <section id="display-result" class="hide-intro hide-playground hide-clock-hands section-flex-column hidden">
         <p id="display-result-title"></p>
       </section>
 
       <!-- 5 hands section, each consisting of the button to pick + paragraph to put the hand holder's name -->
-      <section id="hand-selection" class="hide-intro hide-playground display-clock-hands">
+      <section id="hand-selection" class="hide-intro hide-playground display-clock-hands hidden">
         <div id="container-rock" class="hand-type section-flex-column">
           <p></p>
           <button id="rock" class="hand-type--button"><img src="assets/images/stone.png" alt="hand imitates stone" /></button>
@@ -151,7 +151,7 @@
       </section>
 
       <!-- Section visible with the result messages - return Player to the Playground screen to start new round -->
-      <section id="back-to-new-round" class="hide-intro hide-playground hide-clock-hands">
+      <section id="back-to-new-round" class="hide-intro hide-playground hide-clock-hands hidden">
         <div>
           <button id="back-to-new-round-btn">Back to New Round</button>
         </div>
