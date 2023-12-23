@@ -109,6 +109,7 @@ header {
 
 .sound-toggle > img {
   max-width: 100%;
+  height: auto;
   background-color: #4f8073;
 }
 
