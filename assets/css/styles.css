@@ -270,7 +270,7 @@ main {
   grid-row: 1 / 2;
 }
 
-.stacked-grid > p {
+.stacked-grid > span {
   align-self: center;
 }
 
@@ -295,7 +295,7 @@ main {
   border-color: azure;
 }
 
-#start-control p {
+#start-control span {
   animation: glowing-text 3s infinite;
 }
 
