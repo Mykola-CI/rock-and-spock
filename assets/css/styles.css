@@ -645,6 +645,7 @@ footer > div {
     align-items: center;
     text-align: center;
     z-index: 10;
+    padding: 1rem;
   }
 
   #playground {
@@ -666,5 +667,6 @@ footer > div {
     align-items: center;
     text-align: center;
     z-index: 10;
+    padding: 1rem;
   }
 }
