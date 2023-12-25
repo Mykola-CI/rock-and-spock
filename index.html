@@ -59,10 +59,16 @@
           || &nbsp;&nbsp;spock
         </h2>
         <div id="intro-video">
-          <video controls playsinline muted>
+          <video controls playsinline muted aria-describedby="videoDesc">
             <source src="assets/video/sheldon-rules-of-game.mp4" type="video/mp4" />
+            <img src="assets/video/poster-video-sheldon.jpg" alt="Sheldon and Raj discussing new game" />
             <track kind="captions" src="assets/video/sheldon-rules-of-the-game.vtt" srclang="en" />
           </video>
+          <div id="videoDesc" hidden>
+            Episode from Big Bang Theory series. Sheldon, Raj & Leonard don't know what to watch on TV so Raj suggests Rock Paper
+            Scissors. Sheldon then goes on with facts from his magnificent mind, then reveals a new type of game - Rock, Paper,
+            Scissors, Lizard, Spock. Everybody makes fun of Sheldon explaining rules. 
+          </div>
         </div>
         <div id="start-playground" class="section-flex-column">
           <button id="start-playground-button">Play Game!</button>
