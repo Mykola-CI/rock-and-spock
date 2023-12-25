@@ -42,12 +42,10 @@ h1 {
 
 h2 {
   font-size: clamp(1rem, 2vw + 00.5rem, 1.7rem);
-  /* line-height: 150%; */
 }
 
 h3 {
   font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-  /* font-size: 1.2rem; */
 }
 
 p,
@@ -110,14 +108,12 @@ header {
 
 #back-to-intro-btn {
   width: min(90%, 300px);
-  /* height: 6vh; */
   color: white;
   text-shadow: 1px 1px 0px #16133c;
   box-shadow: 1px 1px 1px #bee2f9;
   padding: 12px 12px;
   border-radius: 28px;
   border: 4px dotted #3866a3;
-  /* background: #4F8073; */
   background: linear-gradient(to top, #4f8073, #c7fcec);
 }
 
@@ -127,7 +123,7 @@ header {
 }
 
 main {
-  /* min-height: 60vh; */
+  flex: 1 0 auto;
   width: min(90%, 1000px);
   display: flex;
   flex-direction: column;
@@ -170,7 +166,6 @@ main {
 
 #start-playground-button {
   width: min(90%, 200px);
-  /* height: 8vh; */
   color: white;
   text-shadow: 1px 1px 0px #16133c;
   box-shadow: 1px 1px 1px #bee2f9;
@@ -235,7 +230,7 @@ main {
   background: linear-gradient(to top, #4f8073, #c7fcec);
   border: 4px dotted #3866a3;
   border-radius: 50%;
-  color: white; /* Text color */
+  color: white;
   padding: 6px;
   text-decoration: none;
   display: inline-block;
