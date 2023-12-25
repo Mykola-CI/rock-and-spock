@@ -1,8 +1,12 @@
 // Utility variables
 const maxNumRounds = 5; // Introduced for convenience of game code handler to change maximum number of rounds
 const hands = ["rock", "paper", "scissors", "lizard", "spock"]; // Array that consists of strings identical to id selectors for 5 available gaming hands
-const audioClick = new Audio("assets/sounds/421251__jaszunio15__click_121.wav");
-const audioPick = new Audio("assets/sounds/28828__junggle__btn018.wav");
+const audioClick = new Audio("assets/sounds/jazz_click_121.wav");
+const audioTie = new Audio("assets/sounds/jungle_btn018.wav");
+const audioVictory = new Audio("assets/sounds/victory-player.wav");
+const audioDefeat = new Audio("assets/sounds/defeat-player.wav");
+audioVictory.volume = 0.2;
+audioDefeat.volume = 0.2;
 
 // Variables To Control And Manipulate DOM Elements:
 
@@ -184,9 +188,6 @@ function validateInput(input) {
  * clear timeout to prevent defineWinner function running the second time
  */
 function handClickHandler(event) {
-  if (soundEnabled) {
-    audioPick.play();
-  }
 
   const clickedHandId = event.currentTarget.id;
   indexUser = hands.indexOf(clickedHandId);
@@ -309,6 +310,9 @@ function displayInputName() {
  */
 function defineWinner(userHand, compHand) {
   if (compHand === userHand) {
+    if (soundEnabled) {
+      audioTie.play();
+    }
     displayResultTitle.innerText = "Yahoo! It's a tie!";
   } else if (
     (userHand === 0 && (compHand === 2 || compHand === 3)) ||
@@ -319,13 +323,22 @@ function defineWinner(userHand, compHand) {
   ) {
     displayResultTitle.innerText = `You won, ${playerName}! ${hands[userHand]} beats ${hands[compHand]}  👍`;
     userChoiceText.style.color = "red";
+    if (soundEnabled) {
+      audioVictory.play();
+    }
     incrementScorePlayer();
   } else if (userHand === 5) {
     displayResultTitle.innerText = `Oi! No hand picked! Pity, you lose anyway!  👎`;
+    if (soundEnabled) {
+      audioDefeat.play();
+    }
     incrementScoreSheldon();
   } else {
     displayResultTitle.innerText = `Ups! Bad Luck, ${playerName} ! ${hands[compHand]} beats ${hands[userHand]}  👎`;
     compChoiceText.style.color = "red";
+    if (soundEnabled) {
+      audioDefeat.play();
+    }
     incrementScoreSheldon();
   }
 
