@@ -539,7 +539,7 @@ footer > div {
     width: max(80px, 28%);
   }
 
-  #clock-countdown > :nth-child(2) {
+  #clock-countdown > :nth-child(3) {
     flex-basis: 200px;
   }
 
