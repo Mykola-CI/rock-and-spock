@@ -52,8 +52,6 @@ Based on your request, here are four user stories for your JavaScript online gam
 
 It displays the game Title which is a playfully rhyming paraphrase "Rock & Spock". At the top left there is the icon of Spock character from Star Trek to begin putting Player in the right atmosphere. At the top right is the sound toggle button.
 
-The game have a couple of amusing sounds basically executed as button clicks, but the screen loads with sounds disabled.
-
 * __The Video and the Button__
 
 Player is given an option to see the video segment where Sheldon character explains about the rules of the game and entertains his roommates. The video is a good tool to build an atmosphere for the First Time Player and it is also fun which is worth to watch multiple times. 
@@ -141,7 +139,7 @@ In addition:
   ![Border flashing animation on touch devices](documentation/features/border-beacon-hover-none.gif
   ) 
 
-  ### Clock and hands Screen
+### Clock and hands Screen
 
   It opens when Player hits the __Start Round!__ button.
 
@@ -193,9 +191,18 @@ When number of Rounds reaches 5, hitting on the button __Back To New Round__ thr
 
 Here the last Round score was 2 : 3 for Sheldon, 5 rounds were played in the last Game, total number of Games played - three, Sheldon the Computer won two Games straight.  
 
+### The Game Sounds
+
+The page loads initially with sounds off. Player can switch the sounds on and off by clicking the Sound Toggle button at the top right corner , which is available across all screens.  
+The game have a couple of amusing sounds:
+* button clicks for __Play Game__ and __Start Round__ buttons
+* _Victory_, _Lose_ and _Tie_ sounds aiding to Player's intuitive comprehension of Round outcomes along with the red color of a winning hand holder and congratulation / commiseration messages. 
+
 ### Smart Phones in Landscape Mode
 
-Current Design Concept does not assume playing in landscape mode on Smart Phone devices. At the same time the game looks good and playable on all standard smart phone sizes in portrait mode. To avoid inconveniences for Player the banner was developed with a request to get back to portrait mode. The banner appears only for the screen widths less than 933px and orientation mode: landscape.
+Current Design Concept does not assume playing in landscape mode on Smart Phone devices. At the same time the game looks good and playable on all standard smart phone sizes in a portrait mode. To avoid inconveniences for Player like extra scrolling and handling sliding address bars and menus caused by device specific rendering, I developed the banner with a request to get back to portrait mode. The banner appears only for the screen widths less than 933px and orientation mode: landscape. 
+
+All other types of mobile devices like tablets can be played in both orientation modes without any negative impact on user experience.
 
 ![Warning banner on the Intro screen for mobiles in landscape mode](documentation/features/intro-warning-landscape.png)
 
@@ -207,7 +214,7 @@ Current Design Concept does not assume playing in landscape mode on Smart Phone 
 
 * Landscape Mode for Mobiles
 
-When there is time I would like to rearrange design and make it suitable for landscape modes for smart phones. Currently, the game is designed to be played on a web browser. However, developing a mobile application would be a better solution for mobiles to handle all orientation modes and issues with rendering and handling different screen sizes such as sliding top menus and address bars. 
+When there is time I would like to rearrange design and make it suitable for landscape modes for smart phones. However, developing a mobile application instead of browser version would be a better solution for mobiles, which can provide a more seamless, efficient, and user-friendly experience, especially when it comes to rendering and handling different screen orientations. 
 
 * Network Solution for Multiplayer Mode
 
