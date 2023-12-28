@@ -1,3 +1,4 @@
+/* Font families Life Savers and Hind Madurai */
 @import url("https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500&family=Life+Savers:wght@400;700;800&display=swap");
 
 *,
@@ -35,6 +36,7 @@ input {
   font-family: "Hind Madurai", sans-serif;
 }
 
+/* Set Responsive Font Sizes */
 h1 {
   font-size: clamp(1.2rem, 3vw + 0.5rem, 2rem);
   padding: 0.3rem;
@@ -55,12 +57,15 @@ input {
   font-size: clamp(0.8rem, 1.8vw + 0.1rem, 1.2rem);
 }
 
+/* Header styles */
 header {
   width: 100%;
   max-width: 1000px;
   text-align: center;
 }
 
+/* Setting grid for the div container nested inside the header
+in order to distribute horizontally 3 child elements */
 #header-grid-container {
   background: #4f8073;
   color: white;
@@ -85,10 +90,6 @@ header {
   grid-area: 1 / 3 / 2 / 4;
 }
 
-#back-to-intro {
-  padding-top: 10px;
-}
-
 .sound-toggle {
   width: max(45px, 60%);
   background-color: #4f8073;
@@ -104,6 +105,12 @@ header {
   max-width: 100%;
   height: auto;
   background-color: #4f8073;
+}
+
+/* The block of styles set for the 2nd child of the header 
+- the button visible on the Playground screen */
+#back-to-intro {
+  padding-top: 10px;
 }
 
 #back-to-intro-btn {
@@ -122,6 +129,7 @@ header {
   background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
+/* Main sections */
 main {
   flex: 1 0 auto;
   width: min(90%, 1000px);
@@ -131,6 +139,7 @@ main {
   align-items: center;
 }
 
+/* Utility class for flex column properties */
 .section-flex-column {
   display: flex;
   flex-direction: column;
@@ -138,6 +147,7 @@ main {
   justify-content: space-around;
 }
 
+/* The title sitting on top of the video block */
 #intro > :nth-child(1) {
   letter-spacing: 2px;
   line-height: 100% !important;
@@ -157,9 +167,9 @@ main {
   width: min(500px, 100%);
 }
 
+/* The block of styles for the Play game button */
 #start-playground {
   width: 100%;
-  /* min-height: 10vh; */
   background-color: #c7fcec;
   padding-bottom: 0.5rem;
 }
@@ -180,6 +190,7 @@ main {
   background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
+/* 2nd title underneath the button on top of the list of rules */
 #intro > :nth-child(4) {
   letter-spacing: 2px;
   padding-top: 20px;
@@ -187,6 +198,8 @@ main {
   text-align: center;
 }
 
+/* Block of rules consisting of 2 div containers with unordered lists,
+setting flex with row orientation */
 #game-rules {
   width: 100%;
   min-height: fit-content;
@@ -203,6 +216,7 @@ main {
   font-size: large;
 }
 
+/* The form for Player's name input */
 #input-name {
   width: min(90%, 800px);
   max-width: 800px;
@@ -242,6 +256,7 @@ main {
   background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
+/* Playground section styles */
 #playground {
   width: min(90%, 800px);
   max-width: 1000px;
@@ -250,6 +265,9 @@ main {
   text-align: center;
   padding-bottom: 12px;
 }
+
+/* Utility class setting the grid for the Z-stacked layout of the button title 'Start Round'
+in front of the Diagram of Rules */
 .stacked-grid {
   color: white;
   display: grid;
@@ -295,7 +313,8 @@ main {
   color: white;
 }
 
-.run-game > h2 {
+.run-game > h2,
+.run-game > h3 {
   margin-inline: auto;
   max-width: 650px;
   padding: 0.5rem;
@@ -306,15 +325,13 @@ main {
   padding-top: 6px;
 }
 
+/* The content of this h3 element is controlled by JS */
 #playground-title {
-  margin-inline: auto;
-  max-width: 650px;
-  padding: 0.5rem;
-  border: 16px solid #4f8073;
   font-size: clamp(100%, 2vw, 150%);
   letter-spacing: 2px;
 }
 
+/* Countdown screen section visible along with the 5 hands section */
 #clock-countdown {
   display: flex;
   justify-content: center;
@@ -330,6 +347,7 @@ main {
   width: 100%;
 }
 
+/* Display results section visible after a hand was picked by Player */
 #display-result {
   width: 80%;
   min-height: 120px;
@@ -347,6 +365,7 @@ main {
   letter-spacing: 2px;
 }
 
+/* The section of 5 hands visible along with the clock and countdown numbers */
 #hand-selection {
   width: 100%;
   display: flex;
@@ -376,6 +395,7 @@ main {
   border: none;
 }
 
+/* The Back to New Round button block visible with Display Results section */
 #back-to-new-round {
   padding: 16px 0;
 }
@@ -400,6 +420,7 @@ main {
   background: linear-gradient(to top, #c7fcec, #4f8073);
 }
 
+/* Footer styles */
 footer {
   z-index: 99;
   bottom: 0;
@@ -409,6 +430,7 @@ footer {
   color: white;
 }
 
+/* Grid container inside the footer to arrange the score board */
 footer > div {
   display: grid;
   grid-template-columns: 12% 3% 12% 60fr 25fr;
@@ -468,6 +490,7 @@ footer > div {
   display: none !important;
 }
 
+/* Pack of 2 animations for the glowing border and text */
 @keyframes glowing {
   0% {
     border-color: #4f8073;
@@ -498,13 +521,16 @@ footer > div {
   }
 }
 
+/* The query set for non-hover devices with the infinite glowing of the border */
 @media (hover: none) {
   #start-control img {
     animation: glowing 3s infinite;
   }
 }
 
+/* The query for smart phones */
 @media only screen and (max-width: 650px) {
+
   #intro > :nth-child(1) {
     letter-spacing: 0;
     width: 100%;
@@ -563,6 +589,7 @@ footer > div {
     padding-bottom: 4px;
   }
 
+  /* Rearranging the Score Board grid for small screens */
   footer h3 {
     font-size: clamp(0.8rem, 5vw, 1rem);
   }
@@ -619,7 +646,9 @@ footer > div {
   }
 }
 
-/* Target only smart phones in orientation mode */
+/* Target only smart phones in orientation mode. 
+The goal is to set banner which alerts Player that design does not assume landscape mode for mobiles
+and requests Player to get back to the portrait mode - to avoid inconveniences with extra scrolling */
 @media only screen and (max-width: 933px) and (orientation: landscape) {
   #intro-video {
     position: relative;

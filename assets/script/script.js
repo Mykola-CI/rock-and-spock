@@ -53,13 +53,15 @@ let timeoutReturn;
 let countdownValue;
 let countdownInterval;
 
+// -- LISTENERS --
+
 /**
- * the Window load event listener to display Intro screen
- * and provide for its full functionality before the button is hit
+ * the Window load LISTENER
+ * to display Intro screen and provide for its full functionality before the button is hit
  * */
 window.onload = (event) => {
 
-  // Gates to the Playground screen
+  // LISTENER - Gates to the Playground screen
   const goPlaygroundButton = document.getElementById("start-playground-button");
   goPlaygroundButton.addEventListener("click", function () {
     if (soundEnabled) {
@@ -74,20 +76,20 @@ window.onload = (event) => {
       prepareNewRound();
       displayPlayground();
     } else {
-      displayInputName();
+      displayInputName(); // Section becomes visible only if playerName = false
     }
-    // Activate listener to return Player to the Intro screen from the Playground screen
+    // Activate LISTENER to return Player to the Intro screen from the Playground screen
     backToIntroButton.addEventListener("click", displayIntro);
   });
 };
 
 /**
- * Listen to the click event on the Sound Toggle button
+ * LISTENER to the click event on the Sound Toggle button
  */
 soundToggleButton.addEventListener("click", toggleSound);
 
 /**
- * Listen to the submit button on the Name Input form, handle player's name input
+ * LISTENER to the submit button on the Name Input form, handle player's name input
  */
 document.getElementById("input-name-form").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -102,7 +104,7 @@ document.getElementById("input-name-form").addEventListener("submit", function (
 });
 
 /**
- * The click event on the button that starts a round, sets timeout and displays hands to pick
+ * LISTENER on the button and function that starts a round, sets timeout and displays hands to pick
  */
 startRoundBtn.addEventListener("click", function () {
   if (soundEnabled) {
@@ -144,7 +146,7 @@ startRoundBtn.addEventListener("click", function () {
     displaySection("back-to-new-round");
   }, 5000);
 
-  // Clear hand titles from previous round and set listeners for 5 hand buttons
+  // Clear hand titles from previous round and set LISTENERS for 5 hand buttons
   handButtons.forEach((handButton) => {
     const buttonLabel = handButton.previousElementSibling;
     buttonLabel.innerHTML = "";
@@ -153,7 +155,7 @@ startRoundBtn.addEventListener("click", function () {
   });
 });
 
-// EXTERNAL FUNCTIONS
+// -- EXTERNAL FUNCTIONS -- 
 
 /**
  * Provides for the toggle effect for the sound on/off button
